@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Override dark mode styles */
+@media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: light; /* Switch to light color scheme */
+      --color-base-100: #ffffff; /* Set a light background color */
+      --color-base-200: #f1f1f1; /* Adjust other colors as needed */
+    }
+  
+    /* Optionally, set a background color for the entire page in dark mode */
+    body {
+      background-color: #ffffff; /* or any other color you prefer */
+      color: #000; /* Set text color for dark mode */
+    }
+  }
+  
