@@ -50,7 +50,7 @@ const Navbar = () => {
     return (
         <>
             <nav className="navbar bg-[#e9e7e7] shadow-lg relative">
-                <div className="navbar bg-[#e9e7e7] shadow-sm container mx-auto px-4 lg:w-2/3 flex justify-between items-center relative">
+                <div className="navbar   container mx-auto px-4 lg:w-7/10 flex justify-between items-center relative">
                     <div className="flex-1">
                         <a className="btn btn-ghost text-xl font-bold transition transform hover:scale-105 shimmer-effect color-change">
                             SDIETTechies

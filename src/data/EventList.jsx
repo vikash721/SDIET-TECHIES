@@ -10,7 +10,7 @@ const EventList = () => {
     const fetchEvents = async () => {
       try {
         console.log("Fetching events...");  // ✅ Debugging log
-        const response = await fetch("https://362e-2409-40d0-2018-af5c-f201-b7f0-5e4a-8b23.ngrok-free.app/event", {
+        const response = await fetch("https://2900-2401-4900-8390-db30-b72b-bd5d-3e0d-e1e3.ngrok-free.app/event", {
           method: "GET",
           headers: {
             "Authorization": "Basic " + btoa("admin:admin123"),
@@ -18,16 +18,16 @@ const EventList = () => {
           },
           credentials: "include",
         });
-  
+
         console.log("Response:", response);  // ✅ Check API response
-  
+
         if (!response.ok) {
           throw new Error(`Failed to fetch events, Status: ${response.status}`);
         }
-  
+
         const data = await response.json();
         console.log("Fetched Data:", data);  // ✅ Check API data
-  
+
         setEvents(data._embedded?.eventList || []);
       } catch (error) {
         console.error("Error fetching events:", error);  // ✅ Show errors
@@ -36,10 +36,10 @@ const EventList = () => {
         setLoading(false);
       }
     };
-  
+
     fetchEvents();
   }, []);
-  
+
 
   if (loading) return <p className="text-center">Loading events...</p>;
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
@@ -68,7 +68,7 @@ const EventList = () => {
 export default EventList;
 
 
-const data = ()=>{
+const data = () => {
 
   const eventDataPreview = {
     "_embedded": {
@@ -135,6 +135,6 @@ const data = ()=>{
       }
     }
   }
-  
+
 
 }

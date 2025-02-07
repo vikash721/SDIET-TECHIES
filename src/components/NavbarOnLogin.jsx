@@ -14,10 +14,10 @@ const NavbarOnLogin = () => {
 
   return (
     <>
-      <nav className="bg-[#e9e7e7] text-black shadow-md w-full">
-        <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
+      <nav className=" text-black shadow-md w-full">
+        <div className="navbar container mx-auto px-4 lg:px-30 py-4 flex justify-between items-center">
           {/* Left Side - Brand Name */}
-          <div>
+          <div className="flex items-center gap-4">
             <Link to="/" className="text-2xl font-bold tracking-wide">SDIETTechies</Link>
           </div>
 
@@ -87,23 +87,27 @@ const NavbarOnLogin = () => {
       {/* Logout Confirmation Modal */}
       <AnimatePresence>
         {isModalOpen && (
-          <motion.dialog
-            open
-            className="modal modal-open"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+          <motion.div
+            className="fixed inset-0 flex justify-center items-center z-50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <div className="modal-box bg-white shadow-lg rounded-lg">
+            <motion.div
+              className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-sm"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
               <h3 className="font-bold text-lg">Confirm Logout</h3>
               <p className="py-4 text-gray-600">Are you sure you want to log out?</p>
               <div className="flex justify-end gap-4">
-                <button onClick={handleLogout} className="btn bg-black hover:scale-105 transition-transform duration-300">Logout</button>
-                <button onClick={() => setIsModalOpen(false)} className="btn btn-ghost hover:scale-105 transition-transform duration-300">Cancel</button>
+                <button onClick={handleLogout} className="btn bg-black text-white hover:bg-gray-800">Logout</button>
+                <button onClick={() => setIsModalOpen(false)} className="btn btn-ghost">Cancel</button>
               </div>
-            </div>
-          </motion.dialog>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

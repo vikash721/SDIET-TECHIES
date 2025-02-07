@@ -12,6 +12,8 @@ import useAuthStore from "./store/useAuthStore"; // Import Zustand store
 import Footer from "./components/Footer"; // Import the Footer component
 import AdminPage from "./Pages/AdminPage";
 
+// import UserProfilePage from "./Pages/UserProfilePage";
+
 const App = () => {
     const { isAuthenticated, login, logout } = useAuthStore(); // Get Zustand state
 
