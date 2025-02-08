@@ -47,10 +47,23 @@ const Navbar = () => {
         return () => clearTimeout(typingTimer);
     }, [charIndex, isDeleting, messageIndex]);
 
+    // ✅ FIX: Prevent scrolling issue when modals are closed
+    useEffect(() => {
+        if (isModalOpen || isSignupModalOpen) {
+            document.body.style.overflow = "hidden"; // Disable scrolling
+        } else {
+            document.body.style.overflow = "auto"; // Restore scrolling
+        }
+
+        return () => {
+            document.body.style.overflow = "auto"; // Cleanup in case of unmount
+        };
+    }, [isModalOpen, isSignupModalOpen]);
+
     return (
         <>
             <nav className="navbar bg-[#e9e7e7] shadow-lg relative">
-                <div className="navbar   container mx-auto px-4 lg:w-7/10 flex justify-between items-center relative">
+                <div className="navbar container mx-auto px-4 lg:w-7/10 flex justify-between items-center relative">
                     <div className="flex-1">
                         <a className="btn btn-ghost text-xl font-bold transition transform hover:scale-105 shimmer-effect color-change">
                             SDIETTechies
@@ -71,7 +84,8 @@ const Navbar = () => {
                                 </button>
                             </li>
                             <li>
-                                <button className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors duration-300 border border-black"
+                                <button
+                                    className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors duration-300 border border-black"
                                     onClick={() => setIsSignupModalOpen(true)}
                                 >
                                     Sign Up
@@ -83,11 +97,13 @@ const Navbar = () => {
             </nav>
 
             {/* Signup Modal */}
-            {isSignupModalOpen && <SignUpModal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)} />}
+            {isSignupModalOpen && (
+                <SignUpModal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)} />
+            )}
 
             {/* Login Modal */}
             {isModalOpen && <LoginModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
-            
+
             <style>
                 {`
                     .shimmer-effect:hover {
