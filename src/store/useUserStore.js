@@ -4,8 +4,9 @@ const useUserStore = create((set) => ({
   userData: {
     name: "John Doe",
     email: "johndoe@example.com",
-    phone: "+1 234 567 890",
+    phone: "9958749688",
     collegeRollNo: "SDIET12345",
+    bio: "I'm a Computer Science student at SDIET, passionate about coding and building cool projects. I love to learn new technologies and frameworks.",
     universityRollNo: "UNI67890",
     department: "Computer Science",
     studyYear: "3rd Year",

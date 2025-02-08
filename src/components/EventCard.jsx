@@ -1,5 +1,5 @@
 import { FaMapMarkerAlt, FaUserCircle } from "react-icons/fa";
-import { MdOutlineAccessTime, MdArrowForward } from "react-icons/md";
+import { MdOutlineAccessTime, MdArrowForward, MdCalendarToday } from "react-icons/md";
 
 // Mapping categories to styles
 const roleStyles = {
@@ -49,10 +49,17 @@ const EventCard = ({ event, theme = "light" }) => {
         <h2 className="card-title text-lg font-bold line-clamp-1">{event.name}</h2>
         <p className="text-sm opacity-80 line-clamp-2 mb-3">{event.description}</p>
         <div className="flex flex-col space-y-2 text-sm opacity-80 mb-4">
+
+          <div className="flex items-center gap-2">
+            <MdCalendarToday className="text-gray-500 flex-shrink-0" />
+            <span className="truncate">{event.date}</span>
+          </div>
+
           <div className="flex items-center gap-2">
             <MdOutlineAccessTime className="text-gray-500 flex-shrink-0" />
             <span className="truncate">{event.time}</span>
           </div>
+
           <div className="flex items-center gap-2">
             <FaMapMarkerAlt className="text-gray-500 flex-shrink-0" />
             <span className="truncate">{event.location}</span>
@@ -60,9 +67,20 @@ const EventCard = ({ event, theme = "light" }) => {
         </div>
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <FaUserCircle className="text-gray-500 text-xl flex-shrink-0" />
-            <span className="text-sm font-medium truncate">{event.organizer?.name || "Unknown Organizer"}</span>
+            {event.organizer?.profilePicture ? (
+              <img
+                src={event.organizer.profilePicture}
+                alt="Organizer Profile"
+                className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+              />
+            ) : (
+              <FaUserCircle className="text-gray-500 text-xl flex-shrink-0" />
+            )}
+            <span className="text-sm font-medium truncate">
+              {event.organizer?.name || "Unknown Organizer"}
+            </span>
           </div>
+
           <button className={`btn btn-sm gap-2 bg-black`}>
             View Details
             <MdArrowForward />

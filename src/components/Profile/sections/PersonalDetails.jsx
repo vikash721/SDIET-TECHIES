@@ -1,20 +1,53 @@
 import React, { useState } from "react";
 import { Mail, Phone, Edit2, Save, X, Linkedin, Github, Globe, Instagram } from "lucide-react";
 import useUserStore from "../../../store/useUserStore";
-import { label } from "framer-motion/client";
 
 const PersonalDetails = () => {
-  const { userData, updateUser } = useUserStore(); // Use updateUser instead of setUserData
+  const { userData, updateUser } = useUserStore();
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({ ...userData });
+  const [bioLength, setBioLength] = useState(userData.bio ? userData.bio.length : 0);
+  const [phoneError, setPhoneError] = useState("");
 
   const handleChange = (e) => {
     setEditedData({ ...editedData, [e.target.name]: e.target.value });
+    if (e.target.name === "bio") {
+      setBioLength(e.target.value.length);
+    }
+  };
+
+  // Handle phone number input with +91 prefix
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, ""); // Only numbers allowed
+    if (value.length <= 10) {
+      setEditedData({ ...editedData, phone: value });
+    }
+  };
+
+  // Validate phone number (exactly 10 digits)
+  const validatePhoneNumber = () => {
+    if (editedData.phone && editedData.phone.length !== 10) {
+      setPhoneError("Invalid number. Phone number must be 10 digits.");
+      return false;
+    } else {
+      setPhoneError("");
+      return true;
+    }
   };
 
   const handleSave = () => {
-    updateUser(editedData); // Update Zustand store
-    setIsEditing(false);
+    if (bioLength <= 200 && validatePhoneNumber()) { // Ensure phone number is valid
+      updateUser(editedData); // Update Zustand store
+      setIsEditing(false);
+    }
+  };
+
+  // Function to format phone number in 5 + 5 format
+  const formatPhoneNumber = (phone) => {
+    if (!phone) return "";
+    const firstFive = phone.slice(0, 5);
+    const lastFive = phone.slice(5, 10);
+    return `${firstFive} ${lastFive}`;
   };
 
   return (
@@ -61,23 +94,64 @@ const PersonalDetails = () => {
             <Mail className="w-4 h-4 mr-2 text-gray-600" />
             {userData.email}
           </p>
-          {/* Bio Section */}
-          <div className="mt-4">
-            <h2 className="text-base md:text-lg font-semibold text-gray-700 text-center md:text-left">Bio</h2>
-            {isEditing ? (
-              <textarea name="bio" value={editedData.bio} onChange={handleChange} className="border p-2 rounded-md w-full text-sm md:text-base" />
-            ) : (
-              <p className="text-gray-600 bg-gray-100 p-3 md:p-4 rounded-lg shadow-sm text-center md:text-left text-sm md:text-base">
-                {userData.bio || "No bio available."}
-              </p>
-            )}
-          </div>
         </div>
       </div>
 
-      {/* Additional Information */}
+      {/* Bio Section */}
+      <div className="mt-4 w-full">
+        <h2 className="text-base md:text-lg font-semibold text-gray-700 text-center md:text-left">Bio</h2>
+        {isEditing ? (
+          <textarea
+            name="bio"
+            value={editedData.bio}
+            onChange={handleChange}
+            maxLength="200" // Increased max length to 200
+            className="border p-2 rounded-md w-full text-sm md:text-base resize-none overflow-wrap break-words"
+            style={{
+              minHeight: '120px', // Minimum height for mobile
+              height: 'auto', // Let the height adjust based on content
+            }}
+          />
+        ) : (
+          <p className="text-gray-600 bg-gray-100 p-3 md:p-4 rounded-lg shadow-sm text-center md:text-left text-sm md:text-base break-words">
+            {userData.bio || "No bio available."}
+          </p>
+        )}
+        {isEditing && (
+          <p className="text-sm text-gray-500 mt-1">
+            {bioLength}/200 {bioLength > 200 && <span className="text-red-600">Max limit reached!</span>}
+          </p>
+        )}
+      </div>
+
+      {/* Phone Number Section */}
+      <div className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-100 rounded-lg shadow-sm w-full">
+        <div>
+          <h3 className="text-xs md:text-sm text-gray-500">Phone</h3>
+          {isEditing ? (
+            <div className="flex items-center space-x-2">
+              <span className="text-gray-500 text-xl">+91</span>
+              <input
+                type="text"
+                name="phone"
+                value={editedData.phone}
+                onChange={handlePhoneChange}
+                maxLength="10" // Restricting to 10 digits
+                className="border p-1 rounded-md w-full text-sm md:text-base"
+                placeholder="Enter phone number"
+              />
+            </div>
+          ) : (
+            <p className="text-gray-900 font-medium text-sm md:text-base">{editedData.phone ? `+91 ${formatPhoneNumber(editedData.phone)}` : "Not provided"}</p>
+          )}
+          {phoneError && <p className="text-red-500 text-sm mt-1">{phoneError}</p>}
+        </div>
+      </div>
+
+      {/* Additional Info */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-2 md:gap-4 w-full">
-        <InfoCard label="Phone" name="phone" value={editedData.phone} isEditing={isEditing} onChange={handleChange} />
+     
+
         <InfoCard label="College Roll No." name="collegeRollNo" value={editedData.collegeRollNo} isEditing={isEditing} onChange={handleChange} />
         <InfoCard label="University Roll No." name="universityRollNo" value={editedData.universityRollNo} isEditing={isEditing} onChange={handleChange} />
         <InfoCard label="Department" name="department" value={editedData.department} isEditing={isEditing} onChange={handleChange} />
@@ -139,6 +213,5 @@ const SocialLink = ({ name, icon, value, isEditing, onChange }) => (
     )}
   </div>
 );
-
 
 export default PersonalDetails;
