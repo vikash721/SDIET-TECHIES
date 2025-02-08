@@ -1,28 +1,4 @@
-import { create } from "zustand";
-
-
-// const fetchEventsFromAPI = async () => {
-//     try {
-//       const response = await fetch("https://your-api-endpoint/event", {
-//         method: "GET",
-//         headers: {
-//           "Authorization": "Basic " + btoa("admin:admin123"),
-//           "Content-Type": "application/json",
-//         },
-//         credentials: "include",
-//       });
-  
-//       if (!response.ok) {
-//         throw new Error(`Failed to fetch events, Status: ${response.status}`);
-//       }
-  
-//       const data = await response.json();
-//       useEventStore.getState().setEvents(data._embedded?.eventList || []);
-//     } catch (error) {
-//       console.error("Error fetching events:", error);
-//     }
-//   };
-  
+import { create } from "zustand"; // ✅ Correct import
 
 const useEventStore = create((set) => ({
   events: [
@@ -35,6 +11,8 @@ const useEventStore = create((set) => ({
       time: "10:00:00",
       banner: "https://media.istockphoto.com/id/1403500817/photo/the-craggies-in-the-blue-ridge-mountains.jpg?s=612x612&w=0&k=20&c=N-pGA8OClRVDzRfj_9AqANnOaDS3devZWwrQNwZuDSk=",
       participants: 500,
+      organizer: { name: "John Doe" },
+      badge: "Tech", // ✅ Added badge category
     },
     {
       name: "IoT & Smart Devices Conference",
@@ -45,6 +23,8 @@ const useEventStore = create((set) => ({
       time: "15:15:00",
       banner: "https://media.istockphoto.com/id/1403500817/photo/the-craggies-in-the-blue-ridge-mountains.jpg?s=612x612&w=0&k=20&c=N-pGA8OClRVDzRfj_9AqANnOaDS3devZWwrQNwZuDSk=",
       participants: 220,
+      organizer: { name: "Alice Johnson" },
+      badge: "Sports", // ✅ Added badge category
     },
     {
       name: "Open Source Hackathon",
@@ -55,6 +35,8 @@ const useEventStore = create((set) => ({
       time: "12:00:00",
       banner: "https://media.istockphoto.com/id/1403500817/photo/the-craggies-in-the-blue-ridge-mountains.jpg?s=612x612&w=0&k=20&c=N-pGA8OClRVDzRfj_9AqANnOaDS3devZWwrQNwZuDSk=",
       participants: 180,
+      organizer: { name: "Michael Lee" },
+      badge: "Hackathon", // ✅ Added badge category
     },
   ],
   setEvents: (newEvents) => set({ events: newEvents }),

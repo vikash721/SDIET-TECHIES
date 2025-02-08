@@ -1,0 +1,26 @@
+Google Aouth id 544879921846-p6btmlu006t345ls2h2seranm7a87q08.apps.googleusercontent.com
+
+
+Tags for user events-
+Tech, Cultural, Sports, Business, Music, Dance, Debate, Hackathon, Gaming, Quiz, Workshop, Seminar, Startup, Art, Photography
+
+
+Here are the tags along with their respective colors:
+
+Tech → bg-orange-500
+Cultural → bg-pink-500
+Sports → bg-green-500
+Business → bg-blue-500
+Music → bg-purple-500
+Dance → bg-yellow-500
+Debate → bg-red-500
+Hackathon → bg-indigo-500
+Gaming → bg-teal-500
+Quiz → bg-gray-500
+Workshop → bg-cyan-500
+Seminar → bg-lime-500
+Startup → bg-fuchsia-500
+Art → bg-rose-500
+Photography → bg-amber-500
+
+
