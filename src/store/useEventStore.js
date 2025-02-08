@@ -1,4 +1,4 @@
-import { create } from "zustand"; // ✅ Correct import
+import { create } from 'zustand';
 
 const useEventStore = create((set) => ({
   events: [
@@ -12,7 +12,7 @@ const useEventStore = create((set) => ({
       banner: "https://media.istockphoto.com/id/1403500817/photo/the-craggies-in-the-blue-ridge-mountains.jpg?s=612x612&w=0&k=20&c=N-pGA8OClRVDzRfj_9AqANnOaDS3devZWwrQNwZuDSk=",
       participants: 500,
       organizer: { name: "John Doe" },
-      badge: "Tech", // ✅ Added badge category
+      badge: "Tech",
     },
     {
       name: "IoT & Smart Devices Conference",
@@ -24,7 +24,7 @@ const useEventStore = create((set) => ({
       banner: "https://media.istockphoto.com/id/1403500817/photo/the-craggies-in-the-blue-ridge-mountains.jpg?s=612x612&w=0&k=20&c=N-pGA8OClRVDzRfj_9AqANnOaDS3devZWwrQNwZuDSk=",
       participants: 220,
       organizer: { name: "Alice Johnson" },
-      badge: "Sports", // ✅ Added badge category
+      badge: "Sports",
     },
     {
       name: "Open Source Hackathon",
@@ -36,10 +36,27 @@ const useEventStore = create((set) => ({
       banner: "https://media.istockphoto.com/id/1403500817/photo/the-craggies-in-the-blue-ridge-mountains.jpg?s=612x612&w=0&k=20&c=N-pGA8OClRVDzRfj_9AqANnOaDS3devZWwrQNwZuDSk=",
       participants: 180,
       organizer: { name: "Michael Lee" },
-      badge: "Hackathon", // ✅ Added badge category
+      badge: "Hackathon",
     },
   ],
-  setEvents: (newEvents) => set({ events: newEvents }),
+  searchQuery: "",
+  filteredEvents: [], // Initially empty
+  setSearchQuery: (query) => set({ searchQuery: query }),
+  setFilteredEvents: (filtered) => set({ filteredEvents: filtered }),
+  filterEvents: () => {
+    set((state) => {
+      const filtered = state.searchQuery
+        ? state.events.filter((event) =>
+            event.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+            event.description.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+            event.badge.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+            event.organizer.name.toLowerCase().includes(state.searchQuery.toLowerCase())
+
+          )
+        : state.events; // If searchQuery is empty, show all events
+      return { filteredEvents: filtered };
+    });
+  },
 }));
 
 export default useEventStore;
