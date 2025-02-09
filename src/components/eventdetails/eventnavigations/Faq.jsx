@@ -1,29 +1,9 @@
 import React, { useState } from "react";
 
-const faqData = [
-  {
-    question: "What is SDIETTechies?",
-    answer: "SDIETTechies is an event management platform for organizing and managing college events at SDIET."
-  },
-  {
-    question: "How can I register for an event?",
-    answer: "You can register for events through the event page by filling out the required details."
-  },
-  {
-    question: "Is there a fee for participating in events?",
-    answer: "The participation fee varies depending on the event. Please check the event details for more information."
-  },
-  {
-    question: "How do I become an event coordinator?",
-    answer: "You can apply to be an event coordinator by expressing your interest through the event registration or reaching out to the event organizers."
-  },
-  {
-    question: "How do I get in touch with an event organizer?",
-    answer: "You can find the event organizers' contact details on the 'Contact Us' page or directly through the event page."
-  },
-];
+const Faq = ({ event }) => {
+  if (!event) return <div>No event data available</div>;
 
-const Faq = () => {
+  const { faqData } = event;
   const [activeIndex, setActiveIndex] = useState(null);
 
   const handleToggle = (index) => {
@@ -31,7 +11,7 @@ const Faq = () => {
   };
 
   return (
-    <div className="w-full p-6 bg-white shadow-lg rounded-lg space-y-6">
+    <div className="w-full p-6 bg-white shadow-lg rounded-lg space-y-6 mb-5">
       <h2 className="text-3xl font-semibold text-gray-900">Frequently Asked Questions</h2>
 
       <div className="space-y-4">
@@ -64,7 +44,6 @@ const Faq = () => {
               </span>
             </div>
 
-            {/* Smooth transition animation for the answer */}
             <div
               className={`overflow-hidden transition-all duration-300 ease-in-out max-h-0 ${
                 activeIndex === index ? "max-h-[500px] py-2" : ""

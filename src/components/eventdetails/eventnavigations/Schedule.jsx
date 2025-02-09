@@ -4,40 +4,15 @@ import { motion } from "framer-motion";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-const scheduleData = {
-  title: "Event Schedule",
-  eventDate: new Date(2025, 2, 15),
-  eventTime: "10:00 AM - 5:00 PM",
-  location: {
-    name: "SDIET Auditorium",
-    url: "https://www.google.com/maps?q=SDIET+Auditorium"
-  },
-  timeline: [
-    {
-      title: "Opening Ceremony",
-      time: "10:00 AM - 10:30 AM"
-    },
-    {
-      title: "Hackathon Begins",
-      time: "10:30 AM - 3:00 PM"
-    },
-    {
-      title: "Lunch Break",
-      time: "1:00 PM - 2:00 PM"
-    },
-    {
-      title: "Final Presentation",
-      time: "3:30 PM - 5:00 PM"
-    }
-  ]
-};
+const Schedule = ({ event }) => {
+  if (!event) return <div>No event data available</div>;
 
-const Schedule = () => {
+  const { scheduleData } = event;
   const [showCalendar, setShowCalendar] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="w-full p-6 bg-white shadow-md rounded-xl">
+    <div className="w-full p-6 bg-white shadow-md rounded-xl mb-5">
       {/* Heading */}
       <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2">{scheduleData.title}</h2>
 
@@ -50,7 +25,7 @@ const Schedule = () => {
           onMouseLeave={() => setShowCalendar(false)}
         >
           <FaCalendarAlt className="text-blue-600" />
-          <span className="font-medium">{scheduleData.eventDate.toDateString()}</span>
+          <span className="font-medium">{new Date(scheduleData.eventDate).toDateString()}</span>
           {showCalendar && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -58,7 +33,7 @@ const Schedule = () => {
               exit={{ opacity: 0, y: 10 }}
               className="absolute top-12 left-0 bg-white shadow-lg rounded-md p-3 z-10 border border-gray-300"
             >
-              <Calendar value={scheduleData.eventDate} className="react-calendar" />
+              <Calendar value={new Date(scheduleData.eventDate)} className="react-calendar" />
             </motion.div>
           )}
         </div>
@@ -77,7 +52,7 @@ const Schedule = () => {
           onMouseLeave={() => setShowTooltip(false)}
         >
           <FaMapMarkerAlt className="text-red-600" />
-          <span className="font-medium">{scheduleData.location.name}</span>
+          <span className="font-medium">{scheduleData.location}</span>
           {showTooltip && (
             <motion.div
               initial={{ opacity: 0, y: 5 }}
@@ -85,7 +60,7 @@ const Schedule = () => {
               exit={{ opacity: 0, y: 5 }}
               className="absolute top-10 left-0 bg-gray-800 text-white text-sm rounded-md px-3 py-1 z-10"
             >
-              Click to open in Maps
+             click to open in map
             </motion.div>
           )}
         </div>

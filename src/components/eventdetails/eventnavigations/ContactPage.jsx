@@ -1,30 +1,26 @@
 import React from "react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 
-const ContactPage = () => {
-  const people = [
-    { id: 1, name: "John Doe", role: "Lead Organizer", email: "john@example.com", phone: "+1234567890", image: "https://picsum.photos/120/120?random=1", roleType: "organizer" },
-    { id: 2, name: "Jane Smith", role: "Co-Organizer", email: "jane@example.com", phone: "+0987654321", image: "https://picsum.photos/100/100?random=2", roleType: "organizer" },
-    { id: 3, name: "Alice Johnson", role: "Tech Coordinator", email: "alice@example.com", phone: "+1122334455", image: "https://picsum.photos/90/90?random=3", roleType: "coordinator" },
-    { id: 4, name: "Bob Williams", role: "Logistics Coordinator", email: "bob@example.com", phone: "+6677889900", image: "https://picsum.photos/90/90?random=4", roleType: "coordinator" },
-    { id: 5, name: "Charlie Brown", role: "Volunteer", email: "charlie@example.com", phone: "+5566778899", image: "https://picsum.photos/80/80?random=5", roleType: "volunteer" },
-  ];
+const ContactPage = ({ event }) => {
+  if (!event) return <div>No event data available</div>;
+
+  const { people } = event;
 
   const getRoleBadgeColor = (roleType) => {
     switch (roleType) {
       case "organizer":
-        return "bg-fuchsia-200 text-fuchsia-900 border border-fuchsia-300"; // Premium color for organizers
+        return "bg-fuchsia-200 text-fuchsia-900 border border-fuchsia-300";
       case "coordinator":
-        return "bg-orange-200 text-orange-900 border border-orange-300"; // Tech color for coordinators
+        return "bg-orange-200 text-orange-900 border border-orange-300";
       case "volunteer":
-        return "bg-pink-200 text-pink-900 border border-pink-300"; // Cultural color for volunteers
+        return "bg-pink-200 text-pink-900 border border-pink-300";
       default:
-        return "bg-gray-200 text-gray-900 border border-gray-300"; // Default gray color for unknown roles
+        return "bg-gray-200 text-gray-900 border border-gray-300";
     }
   };
 
   const formatPhoneNumber = (phone) => {
-    const formatted = phone.replace("+", "").replace(/\D/g, ""); // Remove all non-digit characters
+    const formatted = phone.replace("+", "").replace(/\D/g, "");
     const countryCode = "+91 ";
     const firstPart = formatted.slice(0, 5);
     const secondPart = formatted.slice(5, 10);
@@ -52,7 +48,7 @@ const ContactPage = () => {
   const filterByRoleType = (roleType) => people.filter(person => person.roleType === roleType);
 
   return (
-    <div className="w-full p-6 sm:p-8 bg-white shadow-md rounded-2xl space-y-8">
+    <div className="w-full p-6 sm:p-8 bg-white shadow-md rounded-2xl space-y-8 mb-5">
       <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">Contact Us</h2>
 
       <section>

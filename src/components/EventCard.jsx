@@ -10,6 +10,7 @@ const roleStyles = {
   Sports: "bg-green-200 text-green-900 border border-green-300",
   Business: "bg-blue-200 text-blue-900 border border-blue-300",
   Music: "bg-purple-200 text-purple-900 border border-purple-300",
+  Fashion: "bg-pink-200 text-pink-900 border border-pink-300",
   Dance: "bg-yellow-200 text-yellow-900 border border-yellow-300",
   Debate: "bg-red-200 text-red-900 border border-red-300",
   Hackathon: "bg-indigo-200 text-indigo-900 border border-indigo-300",
