@@ -40,7 +40,7 @@ const EventCard = ({ event, theme = "light" }) => {
     >
       <figure className="relative w-full pt-[56.25%]">
         <img
-          src={event.banner || "/placeholder.svg"}
+          src={event.logo || "/placeholder.svg"}
           alt={event.name}
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
