@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaLinkedin, FaInstagram, FaShare, FaUsers } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import CenteredContainer from "../CenteredContainer";
@@ -9,14 +9,17 @@ import Announcements from "./eventnavigations/Announcements";
 import ContactPage from "./eventnavigations/ContactPage";
 import Faq from "./eventnavigations/Faq";
 import useEventStore from '../../store/useEventStore';
+import { useParams } from "react-router-dom"; // Import useParams
 
-const ViewEventDetails = ({ eventId }) => {
+const ViewEventDetails = () => {
+  const { eventId } = useParams(); // Get the eventId from the URL params
   const [activeTab, setActiveTab] = useState("about");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Get event data from Zustand store
-  const event = useEventStore((state) => state.events.find((event) => event.id === eventId));
+  // Get event data from Zustand store using the eventId
+  const event = useEventStore((state) => state.events.find((event) => event.id === parseInt(eventId)));
 
+  // If no event is found, return an error message
   if (!event) return <div>Event not found</div>;
 
   const { title, participants, eventBanner, logo, socialLinks } = event;

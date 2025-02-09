@@ -12,6 +12,7 @@ import useAuthStore from "./store/useAuthStore"; // Import Zustand store
 import Footer from "./components/Footer"; // Import the Footer component
 import AdminPage from "./Pages/AdminPage";
 import Profile from "./Pages/UserProfilePage";
+import ViewEventDetails from "./components/eventdetails/ViewEventDetails";
 
 // import UserProfilePage from "./Pages/UserProfilePage";
 
@@ -35,6 +36,11 @@ const App = () => {
                             <Route path="/gallery" element={isAuthenticated ? <GalleryPage /> : <Navigate to="/login" />} />
                             <Route path="/admin" element={isAuthenticated ? <AdminPage /> : <Navigate to="/login" />} />
                             <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} />
+                            <Route path="/events/:eventId" element={isAuthenticated ? <ViewEventDetails/> : <Navigate to="/login" />} />
+
+                            {/* <Route path="/events/:eventId/about" element={isAuthenticated ? <ViewEventDetails/> : <Navigate to="/login" />} />
+
+                            <Route path="/events/:eventId/schedule" element={isAuthenticated ? <ViewEventDetails/> : <Navigate to="/login" />} /> */}
 
                             <Route path="*" element={<Navigate to={isAuthenticated ? "/" : "/login"} />} />
                         </Routes>

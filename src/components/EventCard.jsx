@@ -1,6 +1,7 @@
 import React from "react";
 import { FaMapMarkerAlt, FaUserCircle } from "react-icons/fa";
 import { MdOutlineAccessTime, MdArrowForward, MdCalendarToday } from "react-icons/md";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 
 // Mapping categories to styles
 const roleStyles = {
@@ -21,16 +22,21 @@ const roleStyles = {
   Photography: "bg-amber-200 text-amber-900 border border-amber-300",
 };
 
-const EventCard = ({ event, theme = "light", onClick }) => {
+const EventCard = ({ event, theme = "light" }) => {
+  const navigate = useNavigate(); // Initialize the navigate function
+
   // Get the styles for the category, defaulting to 'Tech' if no category is provided
   const badgeStyles = roleStyles[event.badge] || roleStyles["Tech"];
+
+  const handleViewDetailsClick = (eventId) => {
+    navigate(`/events/${eventId}`); // Navigate to the event details page
+  };
 
   return (
     <div
       className={`card w-full max-w-sm shadow-lg hover:shadow-xl transition-all duration-300 
       ${theme === "dark" ? "bg-[#1e1e1e] text-white" : "bg-white text-black"} 
       rounded-xl overflow-hidden`}
-      onClick={onClick} // Trigger the onClick when the card is clicked
     >
       <figure className="relative w-full pt-[56.25%]">
         <img
@@ -77,7 +83,10 @@ const EventCard = ({ event, theme = "light", onClick }) => {
               {event.organizer?.name || "Unknown Organizer"}
             </span>
           </div>
-          <button className={`btn btn-sm gap-2 bg-black`}>
+          <button
+            className={`btn btn-sm gap-2 bg-black`}
+            onClick={() => handleViewDetailsClick(event.id)} // Pass the eventId to the function
+          >
             View Details
             <MdArrowForward />
           </button>

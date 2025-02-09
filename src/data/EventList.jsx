@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import useEventStore from "../store/useEventStore";
-import ViewEventDetails from "../components/eventdetails/ViewEventDetails"; // Import the ViewEventDetails component
+import ViewEventDetails from "../components/eventdetails/ViewEventDetails";
 
 const EventList = () => {
-  const { filteredEvents, filterEvents } = useEventStore(); // Get filtered events from Zustand
-  const [selectedEventId, setSelectedEventId] = useState(null); // State to track selected event ID
+  const { filteredEvents, filterEvents } = useEventStore();
+  const [selectedEventId, setSelectedEventId] = useState(null);
 
   useEffect(() => {
     filterEvents(); // Ensure filteredEvents is populated on component mount
@@ -18,17 +18,15 @@ const EventList = () => {
   return (
     <div>
       {selectedEventId ? (
-        // If event is selected, show the details view
-        <ViewEventDetails eventId={selectedEventId} />
+        <ViewEventDetails eventId={selectedEventId} /> // Show event details for selected event
       ) : (
-        // If no event is selected, show the event list
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <EventCard
                 key={event.id}
                 event={event}
-                onClick={() => handleEventClick(event.id)} // Pass click handler to EventCard
+                onClick={() => handleEventClick(event.id)} // Trigger the event selection when View Details is clicked
               />
             ))
           ) : (
