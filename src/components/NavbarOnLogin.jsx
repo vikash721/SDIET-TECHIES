@@ -1,142 +1,216 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import useAuthStore from "../store/useAuthStore";
 
 const NavbarOnLogin = () => {
   const { logout } = useAuthStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.target.closest(".profile-dropdown") && isProfileOpen) {
-        setIsProfileOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [isProfileOpen]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // ✅ Hamburger menu state
+  const navigate = useNavigate();
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null); // Ref for hamburger button
 
   const handleLogout = () => {
     logout();
-    setIsModalOpen(false);
+    navigate("/login");
   };
 
+  // ✅ Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current && !menuRef.current.contains(event.target) &&
+        buttonRef.current && !buttonRef.current.contains(event.target) // Don't close if clicking on the hamburger button
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <>
-      <nav className="text-black shadow-md w-screen">
-        <div className="navbar container mx-auto px-4 lg:px-10 py-4 flex justify-between items-center">
-          {/* Left Side - Brand Name */}
-          <div className="flex items-center gap-4">
-            <Link to="/" className="text-2xl font-bold tracking-wide">SDIETTechies</Link>
-          </div>
+    <nav className="text-black shadow-md w-screen bg-white">
+      <div className="navbar container mx-auto px-4 lg:px-10 py-4 flex justify-between items-center relative">
+        {/* Left - Logo */}
+        <Link to="/" className="text-2xl font-bold tracking-wide">
+          SDIETTechies
+        </Link>
 
-          {/* Center - Navigation Links (Visible on larger screens) */}
-          <div className="hidden md:flex gap-8 mx-auto font-semibold">
-            {["Home", "Events", "Community", "Gallery"].map((name) => (
-              <Link
-                key={name}
-                to={`/${name.toLowerCase()}`}
-                className="relative after:absolute after:left-0 after:bottom-[-3px] after:w-full after:h-[2px] after:bg-black after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-              >
-                {name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Right Side - Profile & Mobile Menu */}
-          <div className="flex items-center gap-4">
-            {/* Mobile Drawer */}
-            <div className="md:hidden">
-              <button onClick={() => setIsDrawerOpen(true)} className="text-xl">☰</button>
-            </div>
-
-            {/* Profile Dropdown (Visible on larger screens) */}
-            <div className="hidden md:block relative profile-dropdown">
-              <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="btn btn-ghost btn-circle avatar">
-                <div className="w-12 rounded-full hover:scale-105 transition-transform duration-300">
-                  <img
-                    alt="User Avatar"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  />
-                </div>
-              </button>
-              {isProfileOpen && (
-                <ul className="absolute right-0 mt-3 bg-white text-black rounded-lg shadow-lg w-52 p-2 border border-gray-200">
-                  <li><Link to="/profile" className="block px-4 py-2 hover:bg-black hover:text-white">Profile</Link></li>
-                  <li><Link to="/settings" className="block px-4 py-2 hover:bg-black hover:text-white">Settings</Link></li>
-                  <li><button className="block px-4 py-2 hover:bg-black hover:text-white w-full text-left cursor-pointer" onClick={() => setIsModalOpen(true)}>Logout</button></li>
-                </ul>
-              )}
-            </div>
-          </div>
+        {/* Center - Desktop Navigation */}
+        <div className="hidden md:flex gap-8 mx-auto font-semibold">
+          {["Home", "Events", "Community", "Gallery"].map((name) => (
+            <Link
+              key={name}
+              to={`/${name.toLowerCase()}`}
+              className="relative after:absolute after:left-0 after:bottom-[-3px] after:w-full after:h-[2px] after:bg-black after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+            >
+              {name}
+            </Link>
+          ))}
         </div>
-      </nav>
 
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {isDrawerOpen && (
-          <motion.div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsDrawerOpen(false)}
+        {/* ✅ Mobile Hamburger Menu */}
+        <div className="md:hidden flex items-center">
+          <button
+            ref={buttonRef} // Attach ref to button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-black focus:outline-none"
           >
-            <motion.div 
-              className="bg-white w-64 h-full p-4 shadow-lg"
-              initial={{ x: -300 }}
-              animate={{ x: 0 }}
-              exit={{ x: -300 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
+            <svg
+              className="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <button onClick={() => setIsDrawerOpen(false)} className="text-lg font-bold">✖</button>
-              <div className="flex flex-col gap-4 mt-4">
-                {["Home", "Events", "Community", "Gallery"].map((name) => (
-                  <Link key={name} to={`/${name.toLowerCase()}`} className="text-lg hover:text-gray-700">
-                    {name}
-                  </Link>
-                ))}
-                <hr className="my-2" />
-                <Link to="/profile" className="text-lg hover:text-gray-700">Profile</Link>
-                <Link to="/settings" className="text-lg hover:text-gray-700">Settings</Link>
-                <button onClick={() => setIsModalOpen(true)} className="text-lg text-red-600 hover:text-red-800">Logout</button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
 
-      {/* Logout Confirmation Modal */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            className="fixed inset-0 flex justify-center items-center z-50 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
+        {/* ✅ Mobile Menu Content */}
+        <AnimatePresence>
+          {isMenuOpen && (
             <motion.div
-              className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-sm"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              ref={menuRef}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="absolute top-16 left-0 w-full bg-white shadow-md rounded-lg p-4 z-50 flex flex-col space-y-4 md:hidden"
             >
-              <h3 className="font-bold text-lg">Confirm Logout</h3>
-              <p className="py-4 text-gray-600">Are you sure you want to log out?</p>
-              <div className="flex justify-end gap-4">
-                <button onClick={handleLogout} className="btn bg-black text-white hover:bg-gray-800">Logout</button>
-                <button onClick={() => setIsModalOpen(false)} className="btn btn-ghost">Cancel</button>
-              </div>
+              {/* Navigation Links */}
+              {["Home", "Events", "Community", "Gallery"].map((name) => (
+                <Link
+                  key={name}
+                  to={`/${name.toLowerCase()}`}
+                  className="text-lg font-semibold hover:text-gray-600"
+                  onClick={() => setIsMenuOpen(false)} // ✅ Close menu on link click
+                >
+                  {name}
+                </Link>
+              ))}
+
+              {/* ✅ Divider */}
+              <div className="border-t border-gray-300 my-2"></div>
+
+              {/* ✅ Profile Option */}
+              <button
+                onClick={() => {
+                  navigate("/profile");
+                  setIsMenuOpen(false);
+                }}
+                className="text-lg font-semibold hover:text-gray-600 py-2"
+              >
+                Profile
+              </button>
+
+              {/* ✅ Settings Option */}
+              <button onClick={() => navigate("/settings")} className="text-lg font-semibold hover:text-gray-600 py-2">
+                Report Bugs
+              </button>
+
+              {/* ✅ Logout Option */}
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="text-lg font-semibold text-red-600 hover:text-red-800 py-2"
+              >
+                Logout
+              </button>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+          )}
+        </AnimatePresence>
+
+        {/* ✅ Profile Dropdown (Hidden on Mobile) */}
+        <div
+          className="relative profile-dropdown hidden md:block" // ✅ Hides profile icon on mobile
+          onMouseEnter={() => setIsProfileOpen(true)}
+          onMouseLeave={() => setIsProfileOpen(false)}
+        >
+          <button className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 h-10 rounded-full hover:scale-105 transition-transform duration-300">
+              <img
+                alt="User Avatar"
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              />
+            </div>
+          </button>
+
+          <AnimatePresence>
+            {isProfileOpen && (
+              <motion.ul
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute right-0 mt-3 bg-white text-black rounded-lg shadow-xl w-44 p-2 border border-gray-200 overflow-hidden z-50"
+              >
+                <li>
+                  <button
+                    onClick={() => navigate("/profile")}
+                    className="block w-full px-4 py-2 text-sm rounded-md hover:bg-gray-100 transition cursor-pointer"
+                  >
+                    Profile
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    onClick={() => navigate("/settings")}
+                    className="block w-full px-4 py-2 text-sm rounded-md hover:bg-gray-100 transition cursor-pointer"
+                  >
+                    Settings
+                  </button>
+                </li>
+
+                <li>
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="block w-full px-4 py-2 text-sm text-red-600 rounded-md hover:bg-red-100 transition cursor-pointer"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Logout Confirmation Modal */}
+        <AnimatePresence>
+          {isModalOpen && (
+            <motion.div
+              className="fixed inset-0 flex justify-center items-center z-50 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div
+                className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-sm"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <h3 className="font-bold text-lg">Confirm Logout</h3>
+                <p className="py-4 text-gray-600">Are you sure you want to log out?</p>
+                <div className="flex justify-end gap-4">
+                  <button onClick={handleLogout} className="btn bg-red-500 text-white hover:bg-red-600">
+                    Logout
+                  </button>
+                  <button onClick={() => setIsModalOpen(false)} className="btn btn-ghost">
+                    Cancel
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </nav>
   );
 };
 

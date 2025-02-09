@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import useEventStore from "../store/useEventStore"; // ✅ Correct import
+import React from "react";
+import useEventStore from "../store/useEventStore";
+import TypingEffect from "../components/effects/TypingEffect"; // ✅ Import the updated component
 
-// Map event badges to corresponding emojis
 const badgeEmojiMap = {
   Tech: "💻",
   Cultural: "🎭",
@@ -20,67 +20,27 @@ const badgeEmojiMap = {
   Photography: "📸",
 };
 
-const TypingEffect = ({ events }) => {
-  const [currentMessage, setCurrentMessage] = useState("");
-  const [messageIndex, setMessageIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const typingSpeed = isDeleting ? 50 : 100;
-    const delayBetweenTexts = 1000;
-
-    const handleTyping = () => {
-      const fullText = events[messageIndex];
-
-      if (!isDeleting) {
-        setCurrentMessage(fullText.substring(0, charIndex + 1));
-        setCharIndex((prev) => prev + 1);
-      } else {
-        setCurrentMessage(fullText.substring(0, charIndex - 1));
-        setCharIndex((prev) => prev - 1);
-      }
-
-      if (!isDeleting && charIndex === fullText.length) {
-        setTimeout(() => setIsDeleting(true), delayBetweenTexts);
-      } else if (isDeleting && charIndex === 0) {
-        setIsDeleting(false);
-        setMessageIndex((prev) => (prev + 1) % events.length);
-      }
-    };
-
-    const typingTimer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(typingTimer);
-  }, [charIndex, isDeleting, messageIndex, events]);
-
-  return (
-    <div className="text-sm sm:text-base md:text-lg lg:text-xl text-black font-semibold mb-4">
-      <span className="text-gray-900">{currentMessage}</span>
-      <span className="blinking-cursor">|</span>
-    </div>
-  );
-};
-
 const EventSearch = () => {
-  const { events, searchQuery, setSearchQuery, filterEvents } = useEventStore();  // Access events from the store
+  const { events, searchQuery, setSearchQuery, filterEvents } = useEventStore();
 
   const handleSearch = (event) => {
-    setSearchQuery(event.target.value); // Update the query in the store
-    filterEvents(); // Trigger filtering of events
+    setSearchQuery(event.target.value);
+    filterEvents();
   };
 
-  // Create dynamic messages using event data and badges
+  // ✅ Format date as "Day Date Month Year"
   const messages = events.map((event) => {
-    const emoji = badgeEmojiMap[event.badge] || "✨"; // Default emoji if badge is not found
-    return `${emoji} ${event.name} - ${event.date}`;
+    const emoji = badgeEmojiMap[event.badge] || "✨";
+    const formattedDate = new Date(event.date).toDateString(); // Converts to "Day Date Month Year"
+    return `${emoji} ${event.name} - ${formattedDate}`;
   });
 
   return (
     <div className="flex flex-col items-center justify-center p-6 space-y-6">
-      {/* Typing Effect Component with dynamic messages */}
-      <TypingEffect events={messages} />
+      {/* ✅ Typing Effect Component with emojis */}
+      <TypingEffect messages={messages} />
 
-      {/* Sleek and clean Search Bar with Floating Icon */}
+      {/* ✅ Search Bar */}
       <div className="relative w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
         <input
           type="text"

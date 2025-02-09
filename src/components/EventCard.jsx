@@ -1,3 +1,4 @@
+import React from "react";
 import { FaMapMarkerAlt, FaUserCircle } from "react-icons/fa";
 import { MdOutlineAccessTime, MdArrowForward, MdCalendarToday } from "react-icons/md";
 
@@ -20,7 +21,7 @@ const roleStyles = {
   Photography: "bg-amber-200 text-amber-900 border border-amber-300",
 };
 
-const EventCard = ({ event, theme = "light" }) => {
+const EventCard = ({ event, theme = "light", onClick }) => {
   // Get the styles for the category, defaulting to 'Tech' if no category is provided
   const badgeStyles = roleStyles[event.badge] || roleStyles["Tech"];
 
@@ -29,10 +30,9 @@ const EventCard = ({ event, theme = "light" }) => {
       className={`card w-full max-w-sm shadow-lg hover:shadow-xl transition-all duration-300 
       ${theme === "dark" ? "bg-[#1e1e1e] text-white" : "bg-white text-black"} 
       rounded-xl overflow-hidden`}
+      onClick={onClick} // Trigger the onClick when the card is clicked
     >
       <figure className="relative w-full pt-[56.25%]">
-        {" "}
-        {/* 16:9 aspect ratio */}
         <img
           src={event.banner || "/placeholder.svg"}
           alt={event.name}
@@ -49,17 +49,14 @@ const EventCard = ({ event, theme = "light" }) => {
         <h2 className="card-title text-lg font-bold line-clamp-1">{event.name}</h2>
         <p className="text-sm opacity-80 line-clamp-2 mb-3">{event.description}</p>
         <div className="flex flex-col space-y-2 text-sm opacity-80 mb-4">
-
           <div className="flex items-center gap-2">
             <MdCalendarToday className="text-gray-500 flex-shrink-0" />
             <span className="truncate">{event.date}</span>
           </div>
-
           <div className="flex items-center gap-2">
             <MdOutlineAccessTime className="text-gray-500 flex-shrink-0" />
             <span className="truncate">{event.time}</span>
           </div>
-
           <div className="flex items-center gap-2">
             <FaMapMarkerAlt className="text-gray-500 flex-shrink-0" />
             <span className="truncate">{event.location}</span>
@@ -80,7 +77,6 @@ const EventCard = ({ event, theme = "light" }) => {
               {event.organizer?.name || "Unknown Organizer"}
             </span>
           </div>
-
           <button className={`btn btn-sm gap-2 bg-black`}>
             View Details
             <MdArrowForward />

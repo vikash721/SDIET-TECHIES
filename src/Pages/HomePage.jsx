@@ -8,7 +8,7 @@ const HomePage = () => {
     return (
         <>
             {/* <WinnerCarousel /> */}
-            <UserProfilePage/>
+            {/* <UserProfilePage/> */}
         </>
     )
 }

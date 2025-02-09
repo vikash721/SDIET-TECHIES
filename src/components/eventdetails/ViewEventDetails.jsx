@@ -1,133 +1,159 @@
-const EventDetail = ({ event }) => {
-    const badgeEmojiMap = {
-      Tech: "💻",
-      Music: "🎶",
-      Sports: "⚽",
-      Art: "🎨",
-      Science: "🔬",
-      Business: "💼",
-    };
-  
-    // Fallback event object in case the passed event is undefined
-    const defaultEvent = {
-      name: "Tech Expo 2025",
-      date: "March 12, 2025",
-      description: "An exciting event showcasing the latest in tech innovations, featuring speakers from leading companies.",
-      badge: "Tech",
-      location: "SDIET Campus, Main Auditorium",
-      speakers: ["John Doe", "Jane Smith", "Alice Johnson"],
-      contact: "tech@sdiet.com",
-      registrationLink: "https://sdiet.com/register",
-      imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      agenda: [
-        { time: "9:00 AM", topic: "Registration & Welcome" },
-        { time: "10:00 AM", topic: "Keynote: The Future of AI" },
-        { time: "11:00 AM", topic: "Panel Discussion: Tech Innovations" },
-        { time: "12:00 PM", topic: "Networking Lunch" },
-      ],
-      highlights: [
-        "Leading industry experts as speakers.",
-        "Hands-on workshops on AI and Blockchain.",
-        "Networking with like-minded professionals.",
-      ],
-      faqs: [
-        { question: "What should I bring?", answer: "Just your curiosity and enthusiasm!" },
-        { question: "Is there a registration fee?", answer: "Yes, the registration fee is $50." },
-      ],
-    };
-  
-    const eventData = event || defaultEvent;
-  
-    const { name, date, description, badge, location, speakers, contact, registrationLink, imageUrl, agenda, highlights, faqs } = eventData;
-  
-    return (
-      <div className="max-w-6xl mx-auto p-6 bg-white rounded-xl shadow-xl">
-        {/* Event Image with Gradient Overlay */}
-        <div className="relative mb-6">
-          <img src={imageUrl} alt={name} className="w-full h-64 object-cover rounded-xl" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40 rounded-xl"></div>
+import React, { useState } from "react";
+import { FaLinkedin, FaInstagram, FaShare, FaUsers } from "react-icons/fa";
+import { HiMenuAlt3 } from "react-icons/hi";
+import CenteredContainer from "../CenteredContainer";
+import About from "./eventnavigations/About"; // Import the About Component
+import Schedule from "./eventnavigations/Schedule";
+import Guidelines from "./eventnavigations/Guidelines";
+import Announcements from "./eventnavigations/Announcements";
+import ContactPage from "./eventnavigations/ContactPage";
+import Faq from "./eventnavigations/Faq";
+import useEventStore from '../../store/useEventStore';
+
+const ViewEventDetails = ({ eventId }) => {
+  const [activeTab, setActiveTab] = useState("about");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Get event data from Zustand store
+  const event = useEventStore((state) => state.events.find((event) => event.id === eventId));
+
+  if (!event) return <div>Event not found</div>;
+
+  const { title, participants, eventBanner, logo, socialLinks } = event;
+
+  const tabs = [
+    { id: "about", label: "About" },
+    { id: "schedule", label: "Schedule" },
+    { id: "guidelines", label: "Guidelines" },
+    { id: "announcements", label: "Announcements" },
+    { id: "contact", label: "Contact" },
+    { id: "faq", label: "FAQ" },
+  ];
+
+  return (
+    <CenteredContainer>
+      <div className="relative w-full bg-base-100">
+        {/* Banner Section */}
+        <div className="relative h-48 md:h-64 overflow-hidden">
+          <img
+            src={eventBanner}
+            alt="Event Banner"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60"></div>
         </div>
-  
-        {/* Event Name and Badge */}
-        <div className="flex items-center mb-4">
-          <span className="text-4xl font-semibold text-gray-900 mr-2">{badgeEmojiMap[badge] || "✨"}</span>
-          <h1 className="text-4xl font-bold text-gray-900">{name}</h1>
-        </div>
-  
-        {/* Event Date */}
-        <div className="text-lg text-gray-600 mb-6">{date}</div>
-  
-        {/* Event Description */}
-        <div className="text-lg text-gray-700 mb-6">
-          <p>{description}</p>
-        </div>
-  
-        {/* Event Location */}
-        <div className="text-lg text-gray-600 mb-4">
-          <strong>Location: </strong>
-          {location}
-        </div>
-  
-        {/* Speakers/Guests */}
-        <div className="text-lg text-gray-600 mb-4">
-          <strong>Speakers: </strong>
-          {speakers.length > 0 ? speakers.join(", ") : "TBD"}
-        </div>
-  
-        {/* Event Highlights */}
-        <div className="text-lg text-gray-600 mb-6">
-          <strong>Event Highlights:</strong>
-          <ul className="list-disc ml-6 space-y-2">
-            {highlights.map((highlight, index) => (
-              <li key={index} className="text-gray-700">{highlight}</li>
-            ))}
-          </ul>
-        </div>
-  
-        {/* Event Agenda */}
-        <div className="text-lg text-gray-600 mb-6">
-          <strong>Agenda:</strong>
-          <ul className="list-decimal ml-6 space-y-2">
-            {agenda.map((item, index) => (
-              <li key={index} className="text-gray-700">
-                <span className="font-semibold">{item.time}</span>: {item.topic}
-              </li>
-            ))}
-          </ul>
-        </div>
-  
-        {/* Contact Info */}
-        <div className="flex items-center text-lg text-gray-600 mb-6">
-          <span className="material-icons-outlined mr-2">email</span>
-          <strong>Contact: </strong>
-          <a href={`mailto:${contact}`} className="text-blue-600 hover:underline">{contact}</a>
-        </div>
-  
-        {/* Registration Link */}
-        {registrationLink && (
-          <div className="text-lg text-blue-600 mb-6">
-            <a href={registrationLink} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 hover:underline">
-              <span className="material-icons-outlined">event</span>
-              <span>Register Now</span>
-            </a>
+
+        {/* Logo Section */}
+        <div className="absolute left-4 md:left-10 top-36 md:top-48 z-10">
+          <div className="w-28 h-28 md:w-36 md:h-36 bg-base-100 rounded-2xl shadow-2xl overflow-hidden border-4 border-base-100">
+            <img
+              src={logo}
+              className="w-full h-full object-cover"
+              alt="Event Logo"
+            />
           </div>
-        )}
-  
-        {/* FAQs */}
-        <div className="text-lg text-gray-600">
-          <strong>FAQs:</strong>
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-sm">
-                <p className="font-semibold text-gray-800">{faq.question}</p>
-                <p className="text-gray-700">{faq.answer}</p>
+        </div>
+
+        {/* Content Section */}
+        <div className="bg-base-200">
+          <div className="container mx-auto px-4">
+            <div className="pt-20 md:pt-6 pb-6">
+              {/* Title and Actions */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 md:ml-44">
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-black">
+                    {title}
+                  </h1>
+                  <div className="flex items-center gap-2 text-gray-700 mt-1">
+                    <FaUsers className="w-5 h-5 text-primary" />
+                    <span>{participants} Participants Joined</span>
+                  </div>
+                  {/* Social Links */}
+                  <div className="flex gap-4 mt-3">
+                    {socialLinks?.linkedin && (
+                      <a
+                        href={socialLinks.linkedin}
+                        className="transition-transform transform hover:scale-110"
+                        aria-label="LinkedIn"
+                      >
+                        <FaLinkedin className="w-6 h-6 text-indigo-500" />
+                      </a>
+                    )}
+                    {socialLinks?.instagram && (
+                      <a
+                        href={socialLinks.instagram}
+                        className="transition-transform transform hover:scale-110"
+                        aria-label="Instagram"
+                      >
+                        <FaInstagram className="w-6 h-6 text-indigo-500" />
+                      </a>
+                    )}
+                  </div>
+
+                </div>
+                <div className="flex gap-3">
+                  <button className="btn btn-outline btn-sm md:btn-md border-gray-400 hover:border-primary gap-2">
+                    <FaShare className="w-4 h-4 text-primary" />
+                    Share
+                  </button>
+                  <button className="btn btn-primary btn-sm md:btn-md">
+                    Join
+                  </button>
+                </div>
               </div>
-            ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation Bar */}
+        <div className="sticky top-0 z-20 bg-base-100 shadow-md rounded-b-2xl overflow-hidden">
+          <div className="container mx-auto px-4">
+            {/* Mobile Menu Button */}
+            <div className="md:hidden py-3">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="btn btn-ghost w-full justify-between items-center"
+              >
+                <span className="font-medium text-primary">Navigation Menu</span>
+                <HiMenuAlt3 className="w-6 h-6 text-primary" />
+              </button>
+            </div>
+
+            {/* Navigation Tabs */}
+            <nav className={`${isMenuOpen ? "block" : "hidden md:block"}`}>
+              <ul className="flex flex-col md:flex-row -mb-px">
+                {tabs.map((tab) => (
+                  <li key={tab.id} className="md:mr-1">
+                    <button
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`cursor-pointer w-full md:w-auto px-6 py-4 text-sm font-semibold transition-all duration-200 ease-in-out border-b-2 hover:text-primary
+                        ${activeTab === tab.id
+                          ? "border-primary text-primary"
+                          : "border-transparent text-gray-500 hover:border-primary/50"}`}
+                    >
+                      {tab.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div>
+          <div className="prose max-w-none mt-2">
+            {activeTab === "about" && <About event={event} />}
+            {activeTab === "schedule" && <Schedule event={event} />}
+            {activeTab === "guidelines" && <Guidelines event={event} />}
+            {activeTab === "announcements" && <Announcements event={event} />}
+            {activeTab === "contact" && <ContactPage event={event} />}
+            {activeTab === "faq" && <Faq event={event} />}
           </div>
         </div>
       </div>
-    );
-  };
-  
-  export default EventDetail;
-  
+    </CenteredContainer>
+  );
+};
+
+export default ViewEventDetails;

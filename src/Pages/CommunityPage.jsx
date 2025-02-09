@@ -5,6 +5,7 @@ const CommunityPage = () => {
   return (
     <>
     <ViewEventDetails/>
+    
     </>
   )
 }
