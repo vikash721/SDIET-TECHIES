@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GoogleLogin } from "@react-oauth/google";
 import useAuthStore from "../store/useAuthStore";
 
 const LoginModal = ({ isOpen, onClose }) => {
   const { login } = useAuthStore();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleGoogleSuccess = (response) => {
     console.log("Google Login Success:", response);
@@ -14,6 +16,17 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   const handleGoogleFailure = (error) => {
     console.error("Google Login Error:", error);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email === "admin" && password === "admin123") {
+      login();
+      alert("Login successful!");
+      onClose();
+    } else {
+      alert("Invalid email or password!");
+    }
   };
 
   useEffect(() => {
@@ -28,7 +41,7 @@ const LoginModal = ({ isOpen, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 flex justify-center items-center z-50  bg-opacity-30 backdrop-blur-sm"
+          className="fixed inset-0 flex justify-center items-center z-50 bg-opacity-30 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -47,15 +60,27 @@ const LoginModal = ({ isOpen, onClose }) => {
               </button>
             </div>
 
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-sm font-medium">Email</label>
-                <input type="email" className="w-full p-2 border rounded-md" placeholder="Enter your email" />
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
 
               <div className="mb-4">
                 <label className="block text-sm font-medium">Password</label>
-                <input type="password" className="w-full p-2 border rounded-md" placeholder="Enter your password" />
+                <input
+                  type="password"
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
 
               <div className="mb-4">
