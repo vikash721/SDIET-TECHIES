@@ -20,7 +20,6 @@ const ViewEventDetails = () => {
   const event = useEventStore((state) => state.events.find((event) => event.id === parseInt(eventId)));
 
   useEffect(() => {
-    // Redirect to the "About" tab if no specific tab is selected
     if (location.pathname.split("/").length < 4) {
       navigate(`/events/${eventId}/about`);
     }
@@ -43,6 +42,7 @@ const ViewEventDetails = () => {
 
   const handleTabClick = (tabId) => {
     navigate(`/events/${eventId}/${tabId}`);
+    setIsMenuOpen(false); // Close the menu on tab click
   };
 
   return (

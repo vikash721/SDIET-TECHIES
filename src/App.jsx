@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import Navbar from "./components/Navbar";
-import NavbarOnLogin from "./components/NavbarOnLogin";
+import Navbar from "./components/navbars/Navbar";
+import NavbarOnLogin from "./components/navbars/NavbarOnLogin";
 import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
 import EventPage from "./Pages/EventPage";

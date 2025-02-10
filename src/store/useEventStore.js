@@ -182,203 +182,187 @@ const useEventStore = create((set) => ({
 
 
      // New events
-  {
-    name: "Rock Concert 2025",
-    location: "Mumbai, India",
-    date: "2025-05-01",
-    time: "18:00:00",
-    description: "A live rock concert featuring top bands from around the world.",
-    "badge": "Music",
-    participants: 2000,
-    socialLinks: { instagram: "https://instagram.com/rockconcert2025", linkedin: "https://linkedin.com/rockconcert2025" },
-    aboutData: {
-      title: "About the Concert",
-      sections: [
-        { title: "What to Expect", content: "A high-energy rock concert with performances from international and local bands." },
-        { title: "Band Lineup", content: "Bands include The Rolling Stones, Queen Tribute, and others." }
+  
+     {
+      "name": "Tech Conference 2025",
+      "id": 2,
+      "description": "Annual technology conference covering AI, Cloud, and DevOps.",
+      "location": "New Delhi, India",
+      "date": "2025-03-15",
+      "time": "10:00:00",
+      "eventBanner": "https://www.penguins.co.uk/hubfs/event_tech.jpg",
+      "participants": 500,
+      "organizer": { "name": "Aleni Doe", "profilePicture": "https://via.placeholder.com/120.png?text=Aleni+Doe" },
+      "badge": "Tech",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIPOgRFWrdMFat1-sQBbnzqHYVj88FF1OSJQ&s",
+      "socialLinks": { "instagram": "https://instagram.com", "linkedin": "https://linkedin.com" },
+      "aboutData": {
+        "title": "About the Event",
+        "sections": [
+          { "title": "What is This Event?", "content": "Details about the event, including its importance and goals." },
+          { "title": "Keynote Speakers", "content": "Information about keynote speakers and their topics." }
+        ],
+        "callToAction": { "title": "Register Now!", "content": "Join us for an unforgettable experience. Register today!" }
+      },
+      "guidelinesData": {
+        "generalRules": [
+          "Participants must be registered by the deadline.",
+          "Each team can have a maximum of 5 members.",
+          "Late entries will not be accepted."
+        ],
+        "technicalGuidelines": ["Follow all event submission guidelines.", "Use permitted resources only."],
+        "judgingCriteria": ["Innovation", "Presentation", "Technical Implementation"],
+        "resources": { "text": "Additional resources and references will be provided during the event.", "link": "#", "linkText": "Learn More" }
+      },
+      "scheduleData": {
+        "eventDate": "2025-03-15",
+        "eventTime": "10:00 AM - 5:00 PM",
+        "location": "Venue Details Here",
+        "timeline": [
+          { "title": "Opening Ceremony", "time": "10:00 AM - 10:30 AM" },
+          { "title": "Keynote Speech", "time": "10:30 AM - 11:30 AM" },
+          { "title": "Workshops", "time": "11:30 AM - 1:00 PM" }
+        ]
+      },
+      "announcements": [
+        { "title": "Registration Closing Soon!", "date": "2025-02-25", "description": "Register before it's too late!", "urgency": "high" },
+        { "title": "Event Updates", "date": "2025-02-10", "description": "Check out the latest updates on the event page.", "urgency": "normal" }
       ],
-      callToAction: { title: "Get Your Tickets Now!", content: "Don't miss out on the biggest concert of the year!" }
-    },
-    guidelinesData: {
-      generalRules: [
-        "No outside food or beverages allowed.",
-        "Dress code: Casual.",
-        "No professional cameras allowed."
+      "people": [
+        { "id": 1, "name": "John Doe", "role": "Lead Organizer", "email": "john@example.com", "phone": "+1234567890", "image": "https://randomuser.me/api/portraits/men/9.jpg", "roleType": "organizer" },
+        { "id": 2, "name": "Jane Smith", "role": "Co-Organizer", "email": "jane@example.com", "phone": "+0987654321", "image": "https://randomuser.me/api/portraits/men/9.jpg", "roleType": "organizer" },
+        { "id": 3, "name": "Alice Johnson", "role": "Tech Coordinator", "email": "alice@example.com", "phone": "+1122334455", "image": "https://randomuser.me/api/portraits/men/9.jpg", "roleType": "coordinator" },
+        { "id": 4, "name": "Bob Williams", "role": "Logistics Coordinator", "email": "bob@example.com", "phone": "+6677889900", "image": "https://randomuser.me/api/portraits/men/9.jpg", "roleType": "coordinator" },
+        { "id": 5, "name": "Charlie Brown", "role": "Volunteer", "email": "charlie@example.com", "phone": "+5566778899", "image": "https://randomuser.me/api/portraits/men/9.jpg", "roleType": "volunteer" }
       ],
-      technicalGuidelines: ["Make sure your devices are fully charged before attending."],
-      judgingCriteria: ["Audience engagement", "Stage presence", "Sound quality"],
-      resources: { text: "View the complete concert schedule and artist details on our website.", link: "#", linkText: "View Schedule" }
-    },
-    scheduleData: {
-      eventDate: "2025-05-01",
-      eventTime: "6:00 PM - 11:00 PM",
-      location: "Stadium",
-      timeline: [
-        { title: "Opening Act", time: "6:00 PM - 6:45 PM" },
-        { title: "Main Performance", time: "7:00 PM - 10:00 PM" },
-        { title: "Encore", time: "10:15 PM - 11:00 PM" }
+      "faqData": [
+        { "question": "What is SDIETTechies?", "answer": "SDIETTechies is an event management platform for organizing and managing college events at SDIET." },
+        { "question": "How can I register for an event?", "answer": "You can register for events through the event page by filling out the required details." },
+        { "question": "Is there a fee for participating in events?", "answer": "The participation fee varies depending on the event. Please check the event details for more information." },
+        { "question": "How do I become an event coordinator?", "answer": "You can apply to be an event coordinator by expressing your interest through the event registration or reaching out to the event organizers." },
+        { "question": "How do I get in touch with an event organizer?", "answer": "You can find the event organizers' contact details on the 'Contact Us' page or directly through the event page." }
       ]
     },
-    announcements: [
-      { title: "Tickets Now Available", date: "2025-03-20", description: "Get your tickets now before they're sold out!", urgency: "high" }
-    ],
-    people: [
-      { id: 1, name: "Alice Cooper", role: "Event Organizer", email: "alice@concert.com", phone: "+1234567890", image: "https://randomuser.me/api/portraits/men/9.jpg", roleType: "organizer" },
-      { id: 2, name: "John Lennon", role: "Band Coordinator", email: "john@concert.com", phone: "+9876543210", image: "https://randomuser.me/api/portraits/men/10.jpg", roleType: "coordinator" }
-    ],
-    faqData: [
-      { question: "Where can I buy tickets?", answer: "Tickets are available on our official website." },
-      { question: "Is parking available?", answer: "Yes, parking is available at the venue." }
-    ]
-  },
-  {
-    name: "Classical Dance Performance",
-    location: "Delhi, India",
-    date: "2025-06-05",
-    time: "19:00:00",
-    description: "A stunning performance of traditional Indian classical dance by renowned artists.",
-    participants: 300,
-    "badge": "Dance",
-    socialLinks: { instagram: "https://instagram.com/classicaldance2025", linkedin: "https://linkedin.com/classicaldance2025" },
-    aboutData: {
-      title: "About the Performance",
-      sections: [
-        { title: "Event Highlights", content: "Experience the grace of Bharatanatyam, Kathak, and Odissi dances performed by world-class dancers." },
-        { title: "Artists", content: "Performances by famous classical dancers such as Rukmini Vijayakumar and Shovana Narayan." }
+    {
+      "name": "Health & Wellness Summit 2025",
+      "id": 3,
+      "description": "A summit focusing on health, wellness, and fitness trends.",
+      "location": "San Francisco, USA",
+      "date": "2025-04-20",
+      "time": "09:00:00",
+      "eventBanner": "https://example.com/health_summit.jpg",
+      "participants": 300,
+      "organizer": { "name": "Emma Green", "profilePicture": "https://via.placeholder.com/120.png?text=Emma+Green" },
+      "badge": "Health",
+      "logo": "https://example.com/health_logo.png",
+      "socialLinks": { "instagram": "https://instagram.com", "linkedin": "https://linkedin.com" },
+      "aboutData": {
+        "title": "About the Summit",
+        "sections": [
+          { "title": "Summit Overview", "content": "Learn about the latest trends in health and wellness." },
+          { "title": "Featured Speakers", "content": "Meet the experts in health and fitness." }
+        ],
+        "callToAction": { "title": "Sign Up Now!", "content": "Don't miss this opportunity to enhance your wellness journey. Register today!" }
+      },
+      "guidelinesData": {
+        "generalRules": [
+          "Participants must register in advance.",
+          "Follow the event schedule strictly.",
+          "No outside food or drinks allowed."
+        ],
+        "technicalGuidelines": ["Adhere to the event's code of conduct.", "Use eco-friendly products."],
+        "judgingCriteria": ["Engagement", "Content Quality", "Practical Application"],
+        "resources": { "text": "Explore wellness resources and tips.", "link": "#", "linkText": "Discover More" }
+      },
+      "scheduleData": {
+        "eventDate": "2025-04-20",
+        "eventTime": "09:00 AM - 5:00 PM",
+        "location": "Conference Center, San Francisco",
+        "timeline": [
+          { "title": "Welcome Remarks", "time": "09:00 AM - 09:30 AM" },
+          { "title": "Keynote Address", "time": "09:30 AM - 10:30 AM" },
+          { "title": "Panel Discussion", "time": "10:30 AM - 12:00 PM" }
+        ]
+      },
+      "announcements": [
+        { "title": "Early Bird Registration Ends Soon!", "date": "2025-03-30", "description": "Take advantage of early bird discounts.", "urgency": "high" },
+        { "title": "Agenda Released", "date": "2025-03-15", "description": "Check out the full summit agenda.", "urgency": "normal" }
       ],
-      callToAction: { title: "Book Your Seats Now!", content: "Don't miss the mesmerizing classical dance performances!" }
-    },
-    guidelinesData: {
-      generalRules: [
-        "Wear comfortable attire.",
-        "No photography or videography during the performance.",
-        "Arrive at least 30 minutes before the event starts."
+      "people": [
+        { "id": 6, "name": "Olivia Brown", "role": "Event Manager", "email": "olivia@example.com", "phone": "+1234567890", "image": "https://randomuser.me/api/portraits/women/1.jpg", "roleType": "organizer" },
+        { "id": 7, "name": "Liam White", "role": "Assistant Manager", "email": "liam@example.com", "phone": "+0987654321", "image": "https://randomuser.me/api/portraits/men/1.jpg", "roleType": "organizer" },
+        { "id": 8, "name": "Sophia Johnson", "role": "Fitness Expert", "email": "sophia@example.com", "phone": "+1122334455", "image": "https://randomuser.me/api/portraits/women/2.jpg", "roleType": "coordinator" },
+        { "id": 9, "name": "Mason Williams", "role": "Nutritionist", "email": "mason@example.com", "phone": "+6677889900", "image": "https://randomuser.me/api/portraits/men/2.jpg", "roleType": "coordinator" },
+        { "id": 10, "name": "Ava Taylor", "role": "Volunteer", "email": "ava@example.com", "phone": "+5566778899", "image": "https://randomuser.me/api/portraits/women/3.jpg", "roleType": "volunteer" }
       ],
-      technicalGuidelines: ["Ensure your mobile phone is on silent mode."],
-      judgingCriteria: ["Precision", "Grace", "Artistry"],
-      resources: { text: "Learn more about classical dance traditions on our website.", link: "#", linkText: "Learn More" }
-    },
-    scheduleData: {
-      eventDate: "2025-06-05",
-      eventTime: "7:00 PM - 9:00 PM",
-      location: "Cultural Center",
-      timeline: [
-        { title: "Opening Remarks", time: "7:00 PM - 7:10 PM" },
-        { title: "Bharatanatyam Performance", time: "7:15 PM - 7:45 PM" },
-        { title: "Kathak Performance", time: "7:50 PM - 8:20 PM" },
-        { title: "Odissi Performance", time: "8:25 PM - 8:55 PM" }
+      "faqData": [
+        { "question": "What is the Health & Wellness Summit?", "answer": "The Health & Wellness Summit is an event dedicated to promoting health, wellness, and fitness." },
+        { "question": "How can I register for the summit?", "answer": "You can register for the summit through the event page by filling out the registration form." },
+        { "question": "Is there a fee for attending the summit?", "answer": "Yes, there is a registration fee. Please check the event details for more information." },
+        { "question": "Can I participate as a speaker?", "answer": "Yes, you can apply to be a speaker by contacting the event organizers." },
+        { "question": "How do I contact the event organizers?", "answer": "You can find the organizers' contact details on the 'Contact Us' page or through the event page." }
       ]
     },
-    announcements: [
-      { title: "Early Bird Tickets", date: "2025-04-10", description: "Book now to avail 20% off on early bird tickets!", urgency: "normal" }
-    ],
-    people: [
-      { id: 1, name: "Vidya Balan", role: "Event Organizer", email: "vidya@dance.com", phone: "+1234567890", image: "https://randomuser.me/api/portraits/women/11.jpg", roleType: "organizer" },
-      { id: 2, name: "Deepa Mehta", role: "Cultural Coordinator", email: "deepa@dance.com", phone: "+9876543210", image: "https://randomuser.me/api/portraits/women/12.jpg", roleType: "coordinator" }
-    ],
-    faqData: [
-      { question: "What should I wear?", answer: "We recommend semi-formal attire to match the event’s ambiance." },
-      { question: "Is food available?", answer: "Yes, refreshments will be available at the venue." }
-    ]
-  },
-  {
-    name: "Basketball Championship",
-    location: "Chennai, India",
-    date: "2025-07-15",
-    time: "16:00:00",
-    description: "The biggest basketball championship featuring teams from across the country.",
-    participants: 500,
-    "badge": "Sports",
-    socialLinks: { instagram: "https://instagram.com/basketballchampionship2025", linkedin: "https://linkedin.com/basketballchampionship2025" },
-    aboutData: {
-      title: "About the Championship",
-      sections: [
-        { title: "Event Overview", content: "A nationwide championship featuring the top basketball teams." },
-        { title: "Teams Participating", content: "Teams from all major colleges and clubs will compete." }
+    {
+      "name": "Startup Pitch Fest 2025",
+      "id": 4,
+      "description": "A platform for startups to pitch their ideas to investors and industry leaders.",
+      "location": "Berlin, Germany",
+      "date": "2025-05-10",
+      "time": "11:00:00",
+      "eventBanner": "https://example.com/startup_pitch.jpg",
+      "participants": 200,
+      "organizer": { "name": "Noah Lee", "profilePicture": "https://via.placeholder.com/120.png?text=Noah+Lee" },
+      "badge": "Startup",
+      "logo": "https://example.com/startup_logo.png",
+      "socialLinks": { "instagram": "https://instagram.com", "linkedin": "https://linkedin.com" },
+      "aboutData": {
+        "title": "About the Pitch Fest",
+        "sections": [
+          { "title": "Event Purpose", "content": "Connecting startups with potential investors and mentors." },
+          { "title": "Keynote Speakers", "content": "Prominent industry leaders sharing their insights." }
+        ],
+        "callToAction": { "title": "Apply Now!", "content": "Don't miss this opportunity to showcase your startup. Apply today!" }
+      },
+      "guidelinesData": {
+        "generalRules": [
+          "Startups must apply and be selected to pitch.",
+          "Each pitch should not exceed 10 minutes.",
+          "Follow the event's code of conduct."
+        ],
+        "technicalGuidelines": ["Prepare a professional pitch deck.", "Ensure your presentation is within the time limit."],
+        "judgingCriteria": ["Innovation", "Market Potential", "Team Strength"],
+        "resources": { "text": "Resources for preparing your pitch will be provided.", "link": "#", "linkText": "Learn More" }
+      },
+      "scheduleData": {
+        "eventDate": "2025-05-10",
+        "eventTime": "11:00 AM - 6:00 PM",
+        "location": "Startup Hub, Berlin",
+        "timeline": [
+          { "title": "Registration & Networking", "time": "11:00 AM - 12:00 PM" },
+          { "title": "Opening Remarks", "time": "12:00 PM - 12:30 PM" },
+          { "title": "Startup Pitches", "time": "12:30 PM - 3:00 PM" }
+        ]
+      },
+      "announcements": [
+        { "title": "Application Deadline Approaching!", "date": "2025-04-20", "description": "Submit your application before the deadline.", "urgency": "high" },
+        { "title": "Event Schedule Released", "date": "2025-04-15", "description": "Check out the detailed event schedule.", "urgency": "normal" }
       ],
-      callToAction: { title: "Get Your Tickets!", content: "Cheer for your favorite team at the basketball championship!" }
-    },
-    guidelinesData: {
-      generalRules: [
-        "No personal items allowed on the court.",
-        "Teams must follow the official basketball rules."
+      "people": [
+        { "id": 11, "name": "Lucas Martin", "role": "Event Director", "email": "lucas@example.com", "phone": "+1234567890", "image": "https://randomuser.me/api/portraits/men/3.jpg", "roleType": "organizer" },
+        { "id": 12, "name": "Mia Williams", "role": "Assistant Director", "email": "mia@example.com", "phone": "+0987654321", "image": "https://randomuser.me/api/portraits/women/4.jpg", "roleType": "organizer" },
+        { "id": 13, "name": "Henry Brown", "role": "Pitch Coach", "email": "henry@example.com", "phone": "+1122334455", "image": "https://randomuser.me/api/portraits/men/4.jpg", "roleType": "coordinator" },
+        { "id": 14, "name": "Emily Davis", "role": "Logistics Manager", "email": "emily@example.com", "phone": "+6677889900", "image": "https://randomuser.me/api/portraits/women/5.jpg", "roleType": "coordinator" },
+        { "id": 15, "name": "Daniel Wilson", "role": "Volunteer", "email": "daniel@example.com", "phone": "+5566778899", "image": "https://randomuser.me/api/portraits/men/5.jpg", "roleType": "volunteer" }
       ],
-      technicalGuidelines: ["Wear proper sports attire and shoes."],
-      judgingCriteria: ["Teamwork", "Skill", "Sportsmanship"],
-      resources: { text: "Check out the championship rules and regulations on the event page.", link: "#", linkText: "View Rules" }
-    },
-    scheduleData: {
-      eventDate: "2025-07-15",
-      eventTime: "4:00 PM - 9:00 PM",
-      location: "Sports Arena",
-      timeline: [
-        { title: "Match 1", time: "4:00 PM - 5:30 PM" },
-        { title: "Match 2", time: "5:45 PM - 7:15 PM" },
-        { title: "Finals", time: "8:00 PM - 9:00 PM" }
+      "faqData": [
+        { "question": "What is Startup Pitch Fest?", "answer": "Startup Pitch Fest is an event where startups can pitch their ideas to investors and industry leaders." },
+        { "question": "How can I apply to pitch?", "answer": "You can apply to pitch through the event page by submitting your application." },
+        { "question": "Is there a fee for pitching?", "answer": "There is no fee for selected startups to pitch. However, application fees may apply." },
+        { "question": "How do I become a mentor?", "answer": "You can apply to be a mentor by contacting the event organizers." },
+        { "question": "How do I get in touch with the event organizers?", "answer": "You can find the organizers' contact details on the 'Contact Us' page or through the event page." }
       ]
     },
-    announcements: [
-      { title: "Ticket Sales Open", date: "2025-06-01", description: "Get your tickets before they sell out!", urgency: "high" }
-    ],
-    people: [
-      { id: 1, name: "Rajesh Kumar", role: "Event Coordinator", email: "rajesh@basketball.com", phone: "+1234567890", image: "https://randomuser.me/api/portraits/men/13.jpg", roleType: "coordinator" },
-      { id: 2, name: "Priya Rani", role: "Volunteer Coordinator", email: "priya@basketball.com", phone: "+9876543210", image: "https://randomuser.me/api/portraits/women/14.jpg", roleType: "coordinator" }
-    ],
-    faqData: [
-      { question: "Can I bring my own basketball?", answer: "No, all players must use the official event basketballs." },
-      { question: "Where can I watch the matches?", answer: "Matches will be streamed live on our YouTube channel." }
-    ]
-  },
-  {
-    name: "Fashion Show Extravaganza",
-    location: "Kolkata, India",
-    date: "2025-08-10",
-    time: "19:30:00",
-    description: "A grand fashion show showcasing the latest trends by top designers.",
-    participants: 1000,
-    badge: "Fashion",
-    socialLinks: { instagram: "https://instagram.com/fashionshow2025", linkedin: "https://linkedin.com/fashionshow2025" },
-    aboutData: {
-      title: "About the Show",
-      sections: [
-        { title: "Fashion Trends", content: "The latest trends in fashion, from haute couture to streetwear." },
-        { title: "Featured Designers", content: "Designers from around the world will showcase their creations." }
-      ],
-      callToAction: { title: "Reserve Your Seat!", content: "Witness fashion at its finest at our exclusive show!" }
-    },
-    guidelinesData: {
-      generalRules: [
-        "No photography allowed during the runway show.",
-        "Dress code: Formal attire.",
-        "VIP guests will have priority seating."
-      ],
-      technicalGuidelines: ["Stay seated during the show. No standing in the aisles."],
-      judgingCriteria: ["Design", "Creativity", "Execution"],
-      resources: { text: "Learn more about the designers and their collections on the event website.", link: "#", linkText: "Discover Designers" }
-    },
-    scheduleData: {
-      eventDate: "2025-08-10",
-      eventTime: "7:30 PM - 10:30 PM",
-      location: "Grand Ballroom",
-      timeline: [
-        { title: "Opening Remarks", time: "7:30 PM - 7:45 PM" },
-        { title: "Runway Show", time: "8:00 PM - 9:30 PM" },
-        { title: "Closing Ceremony", time: "9:30 PM - 10:00 PM" }
-      ]
-    },
-    announcements: [
-      { title: "VIP Tickets Available", date: "2025-06-01", description: "VIP tickets provide exclusive seating and meet-and-greet with designers.", urgency: "normal" }
-    ],
-    people: [
-      { id: 1, name: "Siddharth Roy", role: "Event Organizer", email: "siddharth@fashion.com", phone: "+1234567890", image: "https://randomuser.me/api/portraits/men/15.jpg", roleType: "organizer" },
-      { id: 2, name: "Ananya Singh", role: "Designer Coordinator", email: "ananya@fashion.com", phone: "+9876543210", image: "https://randomuser.me/api/portraits/women/16.jpg", roleType: "coordinator" }
-    ],
-    faqData: [
-      { question: "Can I purchase outfits from the show?", answer: "Yes, some outfits will be available for purchase after the show." },
-      { question: "Are there any discounts for students?", answer: "Yes, students can avail 15% discount on general tickets." }
-    ]
-  },
-
     // Add more events here...
   ],
 

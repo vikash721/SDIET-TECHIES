@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 
 const WinnerCarousel = () => {
   const winners = [
-    { name: "Rahul", event: "Web 3 Hackathon", image: "https://randomuser.me/api/portraits/men/1.jpg" },
-    { name: "Sanya", event: "AI Challenge", image: "https://randomuser.me/api/portraits/women/1.jpg" },
-    { name: "John", event: "Coding Battle", image: "https://randomuser.me/api/portraits/men/2.jpg" },
+    { name: "Rahul", event: "Web 3 Hackathon", image: "https://randomuser.me/api/portraits/women/86.jpg" },
+    { name: "Sanya", event: "AI Challenge", image: "https://randomuser.me/api/portraits/women/85.jpg" },
+    { name: "John", event: "Coding Battle", image: "https://randomuser.me/api/portraits/men/85.jpg" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

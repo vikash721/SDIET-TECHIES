@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignUpModal";
-import useAuthStore from "../store/useAuthStore";
-import useEventStore from "../store/useEventStore";
-import TypingEffect from "../components/effects/TypingEffect";
+import LoginModal from "../LoginModal";
+import SignUpModal from "../SignUpModal";
+import useAuthStore from "../../store/useAuthStore";
+import useEventStore from "../../store/useEventStore";
+import TypingEffect from "../effects/TypingEffect";
 
 const badgeEmojiMap = {
     Tech: "💻",
@@ -62,7 +62,7 @@ const Navbar = () => {
                             SDIETTechies
                         </a>
                     </div>
-                    
+
                     <div className="absolute left-1/2 transform -translate-x-1/2 text-[#291e00] text-lg font-bold hidden lg:block">
                         {eventMessages.length > 0 && <TypingEffect messages={eventMessages} />}
                     </div>

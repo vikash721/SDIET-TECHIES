@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Faq = ({ event }) => {
   if (!event) return <div>No event data available</div>;
@@ -22,10 +23,9 @@ const Faq = ({ event }) => {
               onClick={() => handleToggle(index)}
             >
               <h3 className="text-lg font-semibold text-gray-800">{faq.question}</h3>
-              <span
-                className={`transition-transform transform ${
-                  activeIndex === index ? "rotate-180" : ""
-                }`}
+              <motion.span
+                animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
               >
                 <svg
                   className="w-5 h-5 text-gray-600"
@@ -41,18 +41,22 @@ const Faq = ({ event }) => {
                     d="M19 9l-7 7-7-7"
                   />
                 </svg>
-              </span>
+              </motion.span>
             </div>
 
-            <div
-              className={`overflow-hidden transition-all duration-300 ease-in-out max-h-0 ${
-                activeIndex === index ? "max-h-[500px] py-2" : ""
-              }`}
-            >
-              <div className="px-6 text-gray-700">
-                <p>{faq.answer}</p>
-              </div>
-            </div>
+            <AnimatePresence>
+              {activeIndex === index && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="px-6 text-gray-700"
+                >
+                  <p className="py-2">{faq.answer}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         ))}
       </div>

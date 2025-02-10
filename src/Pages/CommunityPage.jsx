@@ -1,10 +1,11 @@
 import React from 'react'
-import ViewEventDetails from '../components/eventdetails/ViewEventDetails'
+
 
 const CommunityPage = () => {
   return (
     <>
-    <ViewEventDetails/>
+    
+    <div>Community Page</div>
     
     </>
   )

@@ -1,6 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { FaTimes } from "react-icons/fa";
+import React, { useState } from "react";
+import { HiMenuAlt3 } from "react-icons/hi";
 
 const sections = [
   { id: "personal", label: "Personal Details" },
@@ -11,40 +10,47 @@ const sections = [
   { id: "notifications", label: "Notifications" },
 ];
 
-const ProfileDrawer = ({ showDrawer, setShowDrawer, activeSection, setActiveSection }) => {
-  if (!showDrawer) return null;
+const ProfileDrawer = ({ activeSection, setActiveSection }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden" onClick={() => setShowDrawer(false)}>
-      <motion.div
-        initial={{ x: -250 }}
-        animate={{ x: 0 }}
-        exit={{ x: -250 }}
-        transition={{ duration: 0.3 }}
-        className="fixed left-0 top-0 h-full w-64 bg-white p-6 shadow-lg"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button className="absolute top-4 right-4" onClick={() => setShowDrawer(false)}>
-          <FaTimes className="text-gray-700" />
-        </button>
-        <h2 className="text-xl font-semibold mb-4">Profile</h2>
-        <div className="flex flex-col space-y-4">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => {
-                setActiveSection(section.id);
-                setShowDrawer(false);
-              }}
-              className={`p-3 rounded-xl transition duration-300 cursor-pointer ${
-                activeSection === section.id ? "bg-black text-white" : "bg-gray-200"
-              }`}
-            >
-              {section.label}
-            </button>
-          ))}
+    <div className="sticky top-0 z-20 bg-base-100 border border-gray-200 rounded-lg overflow-hidden mb-3">
+      <div className="container mx-auto px-4">
+        {/* Mobile Menu Button */}
+        <div className="md:hidden py-1 md:shadow-lg ">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="btn btn-ghost w-full flex justify-between items-center"
+          >
+            <span className="font-medium text-primary">Navigation Menu</span>
+            <HiMenuAlt3 className="w-6 h-6 text-primary" />
+          </button>
         </div>
-      </motion.div>
+
+        {/* Navigation Menu */}
+        <nav className={`${isMenuOpen ? "block" : "hidden md:block"}`}>
+          <ul className="flex flex-col md:flex-row -mb-px">
+            {sections.map((section) => (
+              <li key={section.id} className="md:mr-1">
+                <button
+                  onClick={() => {
+                    setActiveSection(section.id);
+                    setIsMenuOpen(false); // Close menu on selection (for mobile)
+                  }}
+                  className={`cursor-pointer w-full md:w-auto px-6 py-4 text-sm font-semibold transition-all duration-200 ease-in-out border-b-2 hover:text-primary
+                    ${
+                      activeSection === section.id
+                        ? "border-primary text-primary"
+                        : "border-transparent text-gray-500 hover:border-primary/50"
+                    }`}
+                >
+                  {section.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 };
