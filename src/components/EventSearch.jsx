@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useEventStore from "../store/useEventStore";
 import TypingEffect from "../components/effects/TypingEffect"; // ✅ Import the updated component
 
@@ -21,15 +21,20 @@ const badgeEmojiMap = {
 };
 
 const EventSearch = () => {
-  const { events, searchQuery, setSearchQuery, filterEvents } = useEventStore();
+  const { events, searchQuery, setSearchQuery, filterEvents, filteredEvents } = useEventStore();
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
     filterEvents();
   };
 
+  // Execute filterEvents on initial render to populate filteredEvents
+  useEffect(() => {
+    filterEvents();
+  }, []);
+
   // ✅ Format date as "Day Date Month Year"
-  const messages = events.map((event) => {
+  const messages = filteredEvents.map((event) => {
     const emoji = badgeEmojiMap[event.badge] || "✨";
     const formattedDate = new Date(event.date).toDateString(); // Converts to "Day Date Month Year"
     return `${emoji} ${event.name} - ${formattedDate}`;

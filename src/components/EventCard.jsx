@@ -21,6 +21,8 @@ const roleStyles = {
   Startup: "bg-fuchsia-200 text-fuchsia-900 border border-fuchsia-300",
   Art: "bg-rose-200 text-rose-900 border border-rose-300",
   Photography: "bg-amber-200 text-amber-900 border border-amber-300",
+  Fest: "bg-purple-200 text-purple-900 border border-purple-300",
+
 };
 
 const EventCard = ({ event, theme = "light" }) => {

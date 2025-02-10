@@ -24,3 +24,11 @@ Art → bg-rose-500
 Photography → bg-amber-500
 
 
+
+
+
+
+
+
+
+

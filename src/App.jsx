@@ -18,7 +18,7 @@ const App = () => {
     const { isAuthenticated, login, logout } = useAuthStore();
 
     return (
-        <GoogleOAuthProvider clientId="544879921846-p6btmlu006t345ls2h2seranm7a87q08.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
             <Router>
                 <div className="flex flex-col min-h-screen">
                     {isAuthenticated ? <NavbarOnLogin onLogout={logout} /> : <Navbar onLogin={login} />}
