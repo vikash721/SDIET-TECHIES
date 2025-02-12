@@ -1,5 +1,5 @@
 import React from 'react'
-import EventForm from '../components/EventForm/MainEventForm'
+
 
 
 const CommunityPage = () => {
