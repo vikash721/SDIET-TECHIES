@@ -55,11 +55,11 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar bg-[#e9e7e7] shadow-lg relative">
+            <nav className="navbar bg-white border-b-1 border-gray-300 relative">
                 <div className="container mx-auto px-4 lg:w-7/10 flex justify-between items-center relative">
                     <div className="flex-1">
                         <a className="btn btn-ghost text-xl font-bold transition transform hover:scale-105 shimmer-effect color-change">
-                            SDIETTechies
+                            <span className="text-2xl font-bold text-orange-600">SDIET<span className="text-2xl font-bold text-indigo-600">Techies</span></span>
                         </a>
                     </div>
 

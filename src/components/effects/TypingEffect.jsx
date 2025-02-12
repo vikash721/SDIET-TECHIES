@@ -8,7 +8,7 @@ const TypingEffect = ({ messages }) => {
 
   useEffect(() => {
     const typingSpeed = isDeleting ? 50 : 100;
-    const delayBetweenTexts = 1000;
+    const delayBetweenTexts = 1500;
 
     const handleTyping = () => {
       const fullText = messages[messageIndex];
@@ -34,9 +34,9 @@ const TypingEffect = ({ messages }) => {
   }, [charIndex, isDeleting, messageIndex, messages]);
 
   return (
-    <div className="text-sm sm:text-base md:text-lg lg:text-xl text-black font-semibold mb-4">
-      <span className="text-gray-900">{currentMessage}</span>
-      <span className="blinking-cursor">|</span>
+    <div className="text-lg font-semibold">
+      <span>{currentMessage}</span>
+      <span className="animate-blink">|</span>
     </div>
   );
 };

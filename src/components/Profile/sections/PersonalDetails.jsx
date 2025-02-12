@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Mail, Phone, Edit2, Save, X, Linkedin, Github, Globe, Instagram } from "lucide-react";
+import { Mail, Phone, Edit2, Save, X } from "lucide-react";
 import useUserStore from "../../../store/useUserStore";
+import InfoCard from "./PersonalDetailsDependencies/InfoCard";
+import SocialLink from "./PersonalDetailsDependencies/SocialLink";
+import { Linkedin, Github, Globe, Instagram } from "lucide-react";
 
 const PersonalDetails = () => {
   const { userData, updateUser } = useUserStore();
@@ -16,7 +19,6 @@ const PersonalDetails = () => {
     }
   };
 
-  // Handle phone number input with +91 prefix
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, ""); // Only numbers allowed
     if (value.length <= 10) {
@@ -24,7 +26,6 @@ const PersonalDetails = () => {
     }
   };
 
-  // Validate phone number (exactly 10 digits)
   const validatePhoneNumber = () => {
     if (editedData.phone && editedData.phone.length !== 10) {
       setPhoneError("Invalid number. Phone number must be 10 digits.");
@@ -36,13 +37,12 @@ const PersonalDetails = () => {
   };
 
   const handleSave = () => {
-    if (bioLength <= 200 && validatePhoneNumber()) { // Ensure phone number is valid
-      updateUser(editedData); // Update Zustand store
+    if (bioLength <= 200 && validatePhoneNumber()) {
+      updateUser(editedData);
       setIsEditing(false);
     }
   };
 
-  // Function to format phone number in 5 + 5 format
   const formatPhoneNumber = (phone) => {
     if (!phone) return "";
     const firstFive = phone.slice(0, 5);
@@ -52,7 +52,6 @@ const PersonalDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-4 md:p-8 md:rounded-xl md:shadow-lg flex flex-col items-center md:items-start space-y-6 md:space-y-8 rounded-lg  border border-gray-200">
-      {/* Header */}
       <div className="w-full flex items-center justify-between">
         <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Personal Details</h1>
         {isEditing ? (
@@ -74,7 +73,6 @@ const PersonalDetails = () => {
         )}
       </div>
 
-      {/* Profile Picture & Basic Info */}
       <div className="flex flex-col items-center text-center md:flex-row md:items-start md:text-left gap-4 md:gap-6 w-full">
         <div className="relative">
           <div className="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden shadow-md border-4 border-gray-200">
@@ -97,7 +95,6 @@ const PersonalDetails = () => {
         </div>
       </div>
 
-      {/* Bio Section */}
       <div className="mt-4 w-full">
         <h2 className="text-base md:text-lg font-semibold text-gray-700 text-center md:text-left">Bio</h2>
         {isEditing ? (
@@ -105,11 +102,11 @@ const PersonalDetails = () => {
             name="bio"
             value={editedData.bio}
             onChange={handleChange}
-            maxLength="200" // Increased max length to 200
+            maxLength="200"
             className="border p-2 rounded-md w-full text-sm md:text-base resize-none overflow-wrap break-words"
             style={{
-              minHeight: '120px', // Minimum height for mobile
-              height: 'auto', // Let the height adjust based on content
+              minHeight: '120px',
+              height: 'auto',
             }}
           />
         ) : (
@@ -124,7 +121,6 @@ const PersonalDetails = () => {
         )}
       </div>
 
-      {/* Phone Number Section */}
       <div className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-100 rounded-lg shadow-sm w-full">
         <div>
           <h3 className="text-xs md:text-sm text-gray-500">Phone</h3>
@@ -136,7 +132,7 @@ const PersonalDetails = () => {
                 name="phone"
                 value={editedData.phone}
                 onChange={handlePhoneChange}
-                maxLength="10" // Restricting to 10 digits
+                maxLength="10"
                 className="border p-1 rounded-md w-full text-sm md:text-base"
                 placeholder="Enter phone number"
               />
@@ -148,17 +144,13 @@ const PersonalDetails = () => {
         </div>
       </div>
 
-      {/* Additional Info */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-2 md:gap-4 w-full">
-     
-
         <InfoCard label="College Roll No." name="collegeRollNo" value={editedData.collegeRollNo} isEditing={isEditing} onChange={handleChange} />
         <InfoCard label="University Roll No." name="universityRollNo" value={editedData.universityRollNo} isEditing={isEditing} onChange={handleChange} />
         <InfoCard label="Department" name="department" value={editedData.department} isEditing={isEditing} onChange={handleChange} />
         <InfoCard label="Study Year" name="studyYear" value={editedData.studyYear} isEditing={isEditing} onChange={handleChange} />
       </div>
 
-      {/* Social Links */}
       <div className="w-full">
         <h2 className="text-base md:text-lg font-semibold text-gray-700 text-center md:text-left">Social Links</h2>
         <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3 mt-2 md:mt-3">
@@ -171,47 +163,5 @@ const PersonalDetails = () => {
     </div>
   );
 };
-
-// InfoCard component for personal details
-const InfoCard = ({ label, name, value, isEditing, onChange }) => (
-  <div className="flex items-center space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-100 rounded-lg shadow-sm w-full">
-    <div>
-      <h3 className="text-xs md:text-sm text-gray-500">{label}</h3>
-      {isEditing ? (
-        <input type="text" name={name} value={value} onChange={onChange} className="border p-1 rounded-md w-full text-sm md:text-base" />
-      ) : (
-        <p className="text-gray-900 font-medium text-sm md:text-base">{value}</p>
-      )}
-    </div>
-  </div>
-);
-
-// SocialLink component for social media links
-const SocialLink = ({ name, icon, value, isEditing, onChange }) => (
-  <div className="w-auto">
-    {isEditing ? (
-      <div className="flex flex-col space-y-1">
-        <label className="text-xs md:text-sm text-gray-600 font-medium">{`Enter ${name.charAt(0).toUpperCase() + name.slice(1)} URL`}</label>
-        <input 
-          type="text" 
-          name={name} 
-          value={value} 
-          onChange={onChange} 
-          className="border p-1 rounded-md w-full text-sm md:text-base" 
-          placeholder={`Paste your ${name} link here...`} 
-        />
-      </div>
-    ) : (
-      <a 
-        href={value || "#"} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition"
-      >
-        {icon}
-      </a>
-    )}
-  </div>
-);
 
 export default PersonalDetails;

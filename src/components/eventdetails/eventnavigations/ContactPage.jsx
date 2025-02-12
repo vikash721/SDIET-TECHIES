@@ -28,7 +28,7 @@ const ContactPage = ({ event }) => {
   };
 
   const ContactCard = ({ person, size }) => (
-    <div className={`bg-gray-100 shadow-md rounded-xl p-5 flex items-center space-x-6 ${size} transform transition-all duration-200 hover:scale-102`}>
+    <div className={`bg-gray-50 shadow-md rounded-xl p-5 flex items-center space-x-6 ${size} transform transition-all duration-200 hover:scale-102`}>
       <img src={person.image} alt={person.name} className="w-12 h-12 rounded-full object-cover shadow-md border-2 border-primary sm:w-16 sm:h-16" />
       <div className="space-y-2">
         <div className="flex items-center gap-3">
