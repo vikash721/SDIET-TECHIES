@@ -59,9 +59,11 @@ const Navbar = () => {
                 <div className="max-w-[1440px] w-full mx-auto px-4 flex justify-between items-center">
                     <div className="flex-1">
                         <a className="btn btn-ghost text-xl font-bold transition transform hover:scale-105 shimmer-effect color-change">
-                            <span className="text-2xl font-bold text-orange-600">SDIET
-                                <span className="text-2xl font-bold text-indigo-600">Techies</span>
+                            <span className="text-xl md:text-2xl font-bold text-orange-600">
+                                SDIET
+                                <span className="text-xl md:text-2xl font-bold text-indigo-600">Techies</span>
                             </span>
+
                         </a>
                     </div>
 
@@ -81,7 +83,7 @@ const Navbar = () => {
                             </li>
                             <li>
                                 <button
-                                    className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors duration-300 border border-black"
+                                    className="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-800 transition-colors duration-300 border border-orange-500"
                                     onClick={() => setIsSignupModalOpen(true)}
                                 >
                                     Sign Up

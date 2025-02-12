@@ -1,4 +1,5 @@
 import React from 'react'
+import HeroSection from '../components/PrHeroSection'
 
 
 
@@ -7,8 +8,8 @@ const CommunityPage = () => {
     <>
     
     <div>Community Page</div>
-
     
+    <HeroSection/>
     
     </>
   )

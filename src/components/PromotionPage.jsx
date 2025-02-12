@@ -5,6 +5,7 @@ import { motion, useAnimation } from "framer-motion"
 import CenteredContainer from "./CenteredContainer"
 import MasonryGrid from "./MasonryGrid"
 import { ChevronDown, Users, Calendar, Bell, ArrowRight, Rocket, Send } from "lucide-react"
+import HeroSection from "./PrHeroSection"
 
 const PromotionPage = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -27,47 +28,8 @@ const PromotionPage = () => {
     <div className="bg-white min-h-screen font-sans">
       <CenteredContainer>
         {/* Hero Section */}
-        <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
-          <motion.div
-            className="z-20 relative text-center"
-            initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
-            variants={fadeIn}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h1 className="text-5xl font-extrabold tracking-wide leading-tight md:text-7xl mb-6">
-              Welcome to <span className="text-orange-600">SDIET</span>
-              <span className="text-indigo-600">Techies</span>
-            </h1>
-            <p className="mt-4 text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
-              Your College Community for Event Management and Innovation
-            </p>
-            <motion.button
-              className="mt-8 px-8 py-4 bg-indigo-600 text-white text-lg rounded-full hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Join Now
-            </motion.button>
-          </motion.div>
-
-          {/* Innovative Elements */}
-          <motion.div className="absolute top-1/4 left-1/4 text-orange-600" animate={controls} custom={0}>
-            <Rocket size={48} />
-          </motion.div>
-          <motion.div className="absolute bottom-1/4 right-1/4 text-indigo-600" animate={controls} custom={1}>
-            <Send size={48} />
-          </motion.div>
-
-          <motion.div
-            className="absolute bottom-10 z-20"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 1, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
-          >
-            <ChevronDown className="w-10 h-10 text-gray-400" />
-          </motion.div>
-        </section>
+        
+        <HeroSection/>
 
         {/* Features Section */}
         <section className="py-20">
@@ -107,7 +69,7 @@ const PromotionPage = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5 }}
             variants={{
               hidden: { opacity: 0, y: 50 },
@@ -126,47 +88,65 @@ const PromotionPage = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, amount: 0.02 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             variants={{
-              hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0 },
+              hidden: { opacity: 0, y: 40, scale: 0.95 },
+              visible: { opacity: 1, y: 0, scale: 1 },
             }}
           >
-            <h2 className="text-4xl font-bold text-gray-800 mb-12 text-center">Our Events Showcase</h2>
-            <MasonryGrid />
-          </motion.div>
-        </section>
-        </CenteredContainer>
-
-        {/* Call to Action */}
-        <section className="py-20 bg-gradient-to-r from-orange-500 to-indigo-600 text-white">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
-            variants={{
-              hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="text-center"
-          >
-            <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Join SDIETTechies today and take your college events to the next level!
-            </p>
-            <motion.button
-              className="px-8 py-4 bg-white text-indigo-600 text-lg font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.h2
+              className="text-4xl font-bold text-gray-800 mb-12 text-center"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
             >
-              Join SDIETTechies Now
-              <ArrowRight className="inline-block ml-2 w-6 h-6" />
-            </motion.button>
+              Our Events Showcase
+            </motion.h2>
+
+            <motion.div
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+              }}
+            >
+              <MasonryGrid />
+            </motion.div>
           </motion.div>
+
         </section>
-     
+      </CenteredContainer>
+
+      {/* Call to Action */}
+      <section className="py-20 bg-gradient-to-r from-orange-500 to-indigo-600 text-white">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+          variants={{
+            hidden: { opacity: 0, y: 50 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          className="text-center"
+        >
+          <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Join SDIETTechies today and take your college events to the next level!
+          </p>
+          <motion.button
+            className="px-8 py-4 bg-white text-indigo-600 text-lg font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 shadow-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Join SDIETTechies Now
+            <ArrowRight className="inline-block ml-2 w-6 h-6" />
+          </motion.button>
+        </motion.div>
+      </section>
+
     </div>
   )
 }
