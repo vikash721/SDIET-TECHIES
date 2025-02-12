@@ -55,11 +55,13 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar bg-white border-b-1 border-gray-300 relative">
-                <div className="container mx-auto px-4 lg:w-7/10 flex justify-between items-center relative">
+            <nav className="navbar bg-white border-b border-gray-300 w-full">
+                <div className="max-w-[1440px] w-full mx-auto px-4 flex justify-between items-center">
                     <div className="flex-1">
                         <a className="btn btn-ghost text-xl font-bold transition transform hover:scale-105 shimmer-effect color-change">
-                            <span className="text-2xl font-bold text-orange-600">SDIET<span className="text-2xl font-bold text-indigo-600">Techies</span></span>
+                            <span className="text-2xl font-bold text-orange-600">SDIET
+                                <span className="text-2xl font-bold text-indigo-600">Techies</span>
+                            </span>
                         </a>
                     </div>
 
@@ -72,7 +74,7 @@ const Navbar = () => {
                             <li>
                                 <button
                                     onClick={() => setIsModalOpen(true)}
-                                    className="text-[#291e00] hover:text-[#d4d2d2] transition-colors duration-300 border border-[#291e00] px-4 py-2 rounded-md "
+                                    className="text-[#291e00] hover:text-[#d4d2d2] transition-colors duration-300 border border-[#291e00] px-4 py-2 rounded-md"
                                 >
                                     Login
                                 </button>
