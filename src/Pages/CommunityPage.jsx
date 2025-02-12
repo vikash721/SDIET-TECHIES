@@ -6,9 +6,9 @@ const CommunityPage = () => {
   return (
     <>
     
-    {/* <div>Community Page</div> */}
+    <div>Community Page</div>
 
-    <EventForm/>
+    
     
     </>
   )
