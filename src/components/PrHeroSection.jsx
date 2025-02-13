@@ -11,9 +11,9 @@ const HeroSection = () => {
 
   useEffect(() => {
     const generateRandomPath = () => ({
-      x: [0, Math.random() * 600 - 300, Math.random() * 600 - 300, 0],
-      y: [0, Math.random() * 400 - 200, Math.random() * 400 - 200, 0],
-      rotate: [0, Math.random() * 360, Math.random() * 360, 0],
+      x: [0, Math.random() * 600 - 300, Math.random() * 100 - 400, 0],
+      y: [0, Math.random() * 400 - 200, Math.random() * 100 - 300, 0],
+      rotate: [0, Math.random() * 360, Math.random() * 180, 0],
     });
 
     const speed = Math.random() * 3 + 5;

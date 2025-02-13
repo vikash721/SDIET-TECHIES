@@ -4,10 +4,10 @@ import { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import useAuthStore from "../../store/useAuthStore"
-import NavLinks from "./navbaronlogindependencies/NavLinks"
-import ProfileDropdown from "./navbaronlogindependencies/ProfileDropdown"
-import MobileMenu from "./navbaronlogindependencies/MobileMenu"
-import LogoutModal from "./navbaronlogindependencies/LogoutModal"
+import NavLinks from "./navbar-on-login-dependencies/NavLinks"
+import ProfileDropdown from "./navbar-on-login-dependencies/ProfileDropdown"
+import MobileMenu from "./navbar-on-login-dependencies/MobileMenu"
+import LogoutModal from "./navbar-on-login-dependencies/LogoutModal"
 
 const NavbarOnLogin = () => {
   const { logout } = useAuthStore()
@@ -28,7 +28,7 @@ const NavbarOnLogin = () => {
   }, [])
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white  border-b border-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
