@@ -16,21 +16,22 @@ const EventList = () => {
   };
 
   return (
-    <div>
+    <div className="w-full max-w-[1440px] mx-auto">
       {selectedEventId ? (
-        <ViewEventDetails eventId={selectedEventId} /> // Show event details for selected event
+        <ViewEventDetails eventId={selectedEventId} />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event) => (
               <EventCard
                 key={event.id}
                 event={event}
-                onClick={() => handleEventClick(event.id)} // Trigger the event selection when View Details is clicked
+                onClick={() => handleEventClick(event.id)}
+                className="w-full sm:w-[48%] md:w-[31%] lg:w-[24%] xl:w-[19%]"
               />
             ))
           ) : (
-            <p className="col-span-full text-center">No events available</p>
+            <p className="w-full text-center">No events available</p>
           )}
         </div>
       )}

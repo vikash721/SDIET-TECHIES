@@ -2,7 +2,7 @@ import React from 'react';
 
 const CenteredContainer = ({ children }) => {
   return (
-    <div className="w-full px-4 lg:w-full xl:w-7/10 2xl:w-2/3 mx-auto">
+    <div className="w-full max-w-[1280px] mx-auto">
       {children}
     </div>
   );

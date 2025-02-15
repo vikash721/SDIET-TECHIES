@@ -1,8 +1,14 @@
 import React from 'react'
+import CoordinatorEventList from '../components/Dashboards/coordinator-dashboard/sections/CoordinatorEventCard'
+
 
 const GalleryPage = () => {
   return (
-    <div>GalleryPage</div>
+    <>
+    {/* <div>GalleryPage</div> */}
+    {/* <CoordinatorEventManage/> */}
+    <CoordinatorEventList/>
+    </>
   )
 }
 

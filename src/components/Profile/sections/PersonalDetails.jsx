@@ -51,7 +51,7 @@ const PersonalDetails = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-4 md:p-8 md:rounded-xl md:shadow-lg flex flex-col items-center md:items-start space-y-6 md:space-y-8 rounded-lg  border border-gray-200">
+    <div className="max-w-4xl bg-white p-4 md:p-8 md:rounded-xl md:shadow-lg flex flex-col items-center md:items-start space-y-6 md:space-y-8 rounded-lg  border border-gray-200">
       <div className="w-full flex items-center justify-between">
         <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Personal Details</h1>
         {isEditing ? (
@@ -66,7 +66,7 @@ const PersonalDetails = () => {
             </button>
           </div>
         ) : (
-          <button onClick={() => setIsEditing(true)} className="flex items-center space-x-2 px-3 py-1.5 bg-black text-white rounded-lg shadow-md hover:bg-gray-800 transition text-sm">
+          <button onClick={() => setIsEditing(true)} className="flex items-center space-x-2 px-3 py-1.5 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-800 transition text-sm">
             <Edit2 className="w-4 h-4" />
             <span>Edit</span>
           </button>

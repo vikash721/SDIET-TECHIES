@@ -53,7 +53,7 @@ const MyEvents = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-xl md:shadow-lg border border-gray-200">
+    <div className="max-w-4xl bg-white p-6 md:p-8 rounded-xl md:shadow-lg border border-gray-200">
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">

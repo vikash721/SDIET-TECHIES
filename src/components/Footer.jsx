@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <>
-      <footer className="footer bg-[#291e00] text-white p-10">
+      <footer className="footer bg-[#291e00] text-white p-10 mt-6">
         <div className="flex justify-between flex-wrap w-full">
           {/* College Info */}
           <aside className="mb-4 w-full sm:w-auto">

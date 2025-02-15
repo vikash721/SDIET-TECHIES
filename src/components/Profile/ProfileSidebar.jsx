@@ -12,23 +12,22 @@ const sections = [
 
 const ProfileSidebar = ({ activeSection, setActiveSection }) => {
   return (
-    <div className="hidden md:block md:w-1/4 bg-white p-6 ">
-      <h2 className="text-xl font-semibold mb-4">Profile</h2>
-      <div className="flex flex-col space-y-4">
+    <aside className="hidden md:block w-64 bg-white shadow-xl rounded-2xl p-6 border border-gray-200 ">
+      <h2 className="text-xl font-bold text-gray-800 mb-6">Profile</h2>
+      <nav className="space-y-4">
         {sections.map((section) => (
           <button
             key={section.id}
             onClick={() => setActiveSection(section.id)}
-            className={`flex items-center space-x-3 p-3 rounded-xl transition duration-300 cursor-pointer ${
-              activeSection === section.id ? "bg-black text-white" : "bg-gray-200"
-            }`}
+            className={`flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-all duration-200 font-medium text-gray-700 
+            ${activeSection === section.id ? "bg-indigo-600 text-white shadow-md" : "hover:bg-gray-200"}`}
           >
-            <span className="text-lg">{section.icon}</span>
-            <span>{section.label}</span>
+            {section.icon}
+            {section.label}
           </button>
         ))}
-      </div>
-    </div>
+      </nav>
+    </aside>
   );
 };
 

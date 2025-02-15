@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom"
 
 const NavLinks = () => {
   const location = useLocation()
-  const links = ["Home", "Events", "Community", "Gallery"]
+  const links = ["Home", "Events", "Community", "Gallery","Manage Events"]
 
   return (
     <div className="hidden sm:ml-6 sm:flex sm:space-x-8">

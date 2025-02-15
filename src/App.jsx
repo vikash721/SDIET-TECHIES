@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import AdminPage from "./Pages/AdminPage";
 import Profile from "./Pages/UserProfilePage";
 import ViewEventDetails from "./components/eventdetails/ViewEventDetails";
+import CoordinatorDashboard from "./components/Dashboards/coordinator-dashboard/CoordinatorDashboard";
 
 const App = () => {
     const { isAuthenticated, login, logout } = useAuthStore();
@@ -33,6 +34,7 @@ const App = () => {
                             <Route path="/admin" element={isAuthenticated ? <AdminPage /> : <Navigate to="/login" />} />
                             <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} />
                             <Route path="/events/:eventId/*" element={isAuthenticated ? <ViewEventDetails /> : <Navigate to="/login" />} />
+                            <Route path="/manage-events" element={isAuthenticated ? <CoordinatorDashboard/> : <Navigate to="/login" />} />
                             <Route path="*" element={<Navigate to={isAuthenticated ? "/" : "/login"} />} />
                         </Routes>
                     </main>

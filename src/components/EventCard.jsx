@@ -1,9 +1,8 @@
 import React from "react";
 import { FaMapMarkerAlt, FaUserCircle } from "react-icons/fa";
 import { MdOutlineAccessTime, MdArrowForward, MdCalendarToday } from "react-icons/md";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import { useNavigate } from "react-router-dom";
 
-// Mapping categories to styles
 const roleStyles = {
   Tech: "bg-orange-200 text-orange-900 border border-orange-300",
   Cultural: "bg-pink-200 text-pink-900 border border-pink-300",
@@ -22,76 +21,78 @@ const roleStyles = {
   Art: "bg-rose-200 text-rose-900 border border-rose-300",
   Photography: "bg-amber-200 text-amber-900 border border-amber-300",
   Fest: "bg-purple-200 text-purple-900 border border-purple-300",
-
 };
 
 const EventCard = ({ event, theme = "light" }) => {
-  const navigate = useNavigate(); // Initialize the navigate function
-
-  // Get the styles for the category, defaulting to 'Tech' if no category is provided
+  const navigate = useNavigate();
   const badgeStyles = roleStyles[event.badge] || roleStyles["Tech"];
 
   const handleViewDetailsClick = (eventId) => {
-    navigate(`/events/${eventId}`); // Navigate to the event details page
+    navigate(`/events/${eventId}`);
   };
 
   return (
     <div
-      className={`card w-full max-w-sm shadow-lg hover:shadow-xl transition-all duration-300 
+      className={`card w-full sm:max-w-[300px] md:max-w-[300px] lg:max-w-[330px] shadow-md hover:shadow-lg transition-all duration-300
       ${theme === "dark" ? "bg-[#1e1e1e] text-white" : "bg-white text-black"} 
-      rounded-xl overflow-hidden`}
+      rounded-lg overflow-hidden`}
     >
-      <figure className="relative w-full pt-[56.25%]">
+      {/* Image */}
+      <figure className="relative w-full pt-[50%]">
         <img
           src={event.logo || "/placeholder.svg"}
           alt={event.name}
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-50"></div>
         <div className="absolute top-2 right-2">
           <div className={`px-3 py-1 rounded-full text-sm font-medium shadow-sm ${badgeStyles}`}>
             {event.badge || "Tech"}
           </div>
         </div>
       </figure>
+
+      {/* Card Body */}
       <div className="card-body p-4">
         <h2 className="card-title text-lg font-bold line-clamp-1">{event.name}</h2>
         <p className="text-sm opacity-80 line-clamp-2 mb-3">{event.description}</p>
+
+        {/* Event Details */}
         <div className="flex flex-col space-y-2 text-sm opacity-80 mb-4">
           <div className="flex items-center gap-2">
-            <MdCalendarToday className="text-gray-500 flex-shrink-0" />
+            <MdCalendarToday className="text-gray-500 text-base" />
             <span className="truncate">{event.date}</span>
           </div>
           <div className="flex items-center gap-2">
-            <MdOutlineAccessTime className="text-gray-500 flex-shrink-0" />
+            <MdOutlineAccessTime className="text-gray-500 text-base" />
             <span className="truncate">{event.time}</span>
           </div>
           <div className="flex items-center gap-2">
-            <FaMapMarkerAlt className="text-gray-500 flex-shrink-0" />
+            <FaMapMarkerAlt className="text-gray-500 text-base" />
             <span className="truncate">{event.location}</span>
           </div>
         </div>
-        <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center gap-2 min-w-0 flex-1">
+
+        {/* Organizer + Button */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 min-w-0">
             {event.organizer?.profilePicture ? (
               <img
                 src={event.organizer.profilePicture}
-                alt="Organizer Profile"
-                className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+                alt="Organizer"
+                className="w-7 h-7 rounded-full object-cover"
               />
             ) : (
-              <FaUserCircle className="text-gray-500 text-xl flex-shrink-0" />
+              <FaUserCircle className="text-gray-500 text-2xl" />
             )}
-            <span className="text-sm font-medium truncate">
-              {event.organizer?.name || "Unknown Organizer"}
-            </span>
+            <span className="text-sm font-medium truncate">{event.organizer?.name || "Unknown"}</span>
           </div>
+
           <button
-            className={`btn btn-sm gap-2 bg-black`}
-            onClick={() => handleViewDetailsClick(event.id)} // Pass the eventId to the function
+            className="btn btn-sm bg-indigo-500 flex items-center gap-2 hover:scale-105 transition-transform"
+            onClick={() => handleViewDetailsClick(event.id)}
           >
             View Details
-            <MdArrowForward />
+            <MdArrowForward className="text-base" />
           </button>
         </div>
       </div>

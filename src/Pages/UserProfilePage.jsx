@@ -23,24 +23,25 @@ const Profile = () => {
 
   return (
     <CenteredContainer>
-      <div className="flex flex-col md:flex-row min-h-screen pb-20 md:pb-10 lg:pb-6 w-full p-4 ">
-        {/* Sidebar (Only visible on larger screens) */}
-        <ProfileSidebar activeSection={activeSection} setActiveSection={setActiveSection} />
-
-        {/* Mobile Drawer (Only visible on small screens) */}
-        {isMobile && (
-          <ProfileDrawer
-            showDrawer={showDrawer}
-            setShowDrawer={setShowDrawer}
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-          />
-        )}
-
-        {/* Content Area */}
-        <ProfileContent activeSection={activeSection} />
-      </div>
-    </CenteredContainer>
+    <div className="flex flex-col md:flex-row min-h-screen lg:pb-6 w-full p-4 gap-4 md:gap-6 lg:gap-8">
+      {/* Sidebar (Visible on Desktop) */}
+      <ProfileSidebar activeSection={activeSection} setActiveSection={setActiveSection} />
+  
+      {/* Mobile Drawer (Visible on Small Screens) */}
+      {isMobile && (
+        <ProfileDrawer
+          showDrawer={showDrawer}
+          setShowDrawer={setShowDrawer}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
+      )}
+  
+      {/* Content Area */}
+      <ProfileContent activeSection={activeSection} />
+    </div>
+  </CenteredContainer>
+  
   );
 };
 
