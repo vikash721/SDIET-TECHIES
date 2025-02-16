@@ -27,7 +27,7 @@ export default function TeachersDashboard() {
       {/* Conditionally render Sidebar for large screens and SideDrawer for mobile */}
       
 
-      <main className="flex-1 overflow-y-auto p-8">
+      <main className="flex-1 overflow-y-auto ">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
