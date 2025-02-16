@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaClock } from "react-icons/fa";
 import { formatDistanceToNow, parseISO } from "date-fns";
+import { useParams } from "react-router-dom";
+import useEventStore from '../../../store/useEventStore'; // Adjust the import path as needed
 
 const urgencyStyles = {
   "high": "border-red-600 bg-red-50 text-red-800",
@@ -15,7 +17,12 @@ const formatTime = (date) => {
   return timeDiff;
 };
 
-const Announcements = ({ event }) => {
+const Announcements = () => {
+  const { eventId } = useParams();
+  const event = useEventStore((state) => 
+    state.events.find((event) => event.id.toString() === eventId)
+  );
+
   if (!event) return <div>No event data available</div>;
 
   const { announcements } = event;

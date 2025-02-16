@@ -9,14 +9,14 @@ const EventList = () => {
 
   useEffect(() => {
     filterEvents(); // Ensure filteredEvents is populated on component mount
-  }, [filterEvents]);
+  }, []);
 
   const handleEventClick = (eventId) => {
     setSelectedEventId(eventId); // Update the selected event ID
   };
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto">
+    <div className="w-full max-w-[1440px] mx-auto p-4">
       {selectedEventId ? (
         <ViewEventDetails eventId={selectedEventId} />
       ) : (
@@ -26,12 +26,12 @@ const EventList = () => {
               <EventCard
                 key={event.id}
                 event={event}
-                onClick={() => handleEventClick(event.id)}
+                onClick={handleEventClick}
                 className="w-full sm:w-[48%] md:w-[31%] lg:w-[24%] xl:w-[19%]"
               />
             ))
           ) : (
-            <p className="w-full text-center">No events available</p>
+            <p className="w-full text-center text-lg font-medium text-gray-500">No events available</p>
           )}
         </div>
       )}

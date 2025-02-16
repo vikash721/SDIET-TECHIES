@@ -1,13 +1,21 @@
-import { useRef } from "react"
-import { Link, useLocation } from "react-router-dom"
-import { motion, AnimatePresence } from "framer-motion"
+import { useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import useUserStore from "../../../store/useUserStore";
 
-
 const MobileMenu = ({ isMenuOpen, setIsMenuOpen, setIsModalOpen }) => {
-  const menuRef = useRef(null)
-  const location = useLocation() // Get the current location
+  const menuRef = useRef(null);
+  const location = useLocation();
   const { userData } = useUserStore();
+
+  // Navigation menu as an array of objects
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "Events", path: "/events" },
+    { name: "Community", path: "/community" },
+    { name: "Gallery", path: "/gallery" },
+    { name: "Manage Events", path: "/manage-events" },
+  ];
 
   return (
     <AnimatePresence>
@@ -21,12 +29,12 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, setIsModalOpen }) => {
           className="sm:hidden"
         >
           <div className="pt-2 pb-3 space-y-1">
-            {["Home", "Events", "Community", "Gallery"].map((name) => (
+            {menuItems.map(({ name, path }) => (
               <Link
                 key={name}
-                to={`/${name.toLowerCase()}`}
+                to={path}
                 className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
-                  location.pathname === `/${name.toLowerCase()}` || (location.pathname === "/" && name.toLowerCase() === "home")
+                  location.pathname === path
                     ? "text-indigo-600 border-indigo-400"
                     : "text-gray-600 border-transparent hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300"
                 } transition duration-150 ease-in-out`}
@@ -36,6 +44,8 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, setIsModalOpen }) => {
               </Link>
             ))}
           </div>
+
+          {/* Profile Section */}
           <div className="pt-4 pb-3 border-t border-gray-200">
             <div className="flex items-center px-4">
               <div className="flex-shrink-0">
@@ -50,6 +60,8 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, setIsModalOpen }) => {
                 <div className="text-sm font-medium leading-5 text-gray-500">{userData.email}</div>
               </div>
             </div>
+
+            {/* Additional Links */}
             <div className="mt-3 space-y-1">
               <Link
                 to="/profile"
@@ -67,8 +79,8 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, setIsModalOpen }) => {
               </Link>
               <button
                 onClick={() => {
-                  setIsModalOpen(true)
-                  setIsMenuOpen(false)
+                  setIsModalOpen(true);
+                  setIsMenuOpen(false);
                 }}
                 className="block w-full text-left px-4 py-2 text-base font-medium text-red-600 hover:text-red-800 hover:bg-red-100 transition duration-150 ease-in-out"
               >
@@ -79,7 +91,7 @@ const MobileMenu = ({ isMenuOpen, setIsMenuOpen, setIsModalOpen }) => {
         </motion.div>
       )}
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default MobileMenu
+export default MobileMenu;

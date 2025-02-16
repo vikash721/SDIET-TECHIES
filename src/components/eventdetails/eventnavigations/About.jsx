@@ -1,8 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
 import useEventStore from '../../../store/useEventStore'; // Adjust the import path as needed
 
-const About = ({ event }) => {
+const About = () => {
+  const { eventId } = useParams();
+  const event = useEventStore((state) => 
+    state.events.find((event) => event.id.toString() === eventId)
+  );
+
   if (!event) {
     return <div>No event data available</div>;
   }

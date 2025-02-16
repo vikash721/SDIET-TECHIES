@@ -3,13 +3,22 @@ import { FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { useParams } from "react-router-dom";
+import useEventStore from '../../../store/useEventStore'; // Adjust the import path as needed
 
-const Schedule = ({ event }) => {
+
+const Schedule = () => {
+  const { eventId } = useParams();
+  const event = useEventStore((state) => 
+    state.events.find((event) => event.id.toString() === eventId)
+  );
+
   if (!event) return <div>No event data available</div>;
 
   const { scheduleData } = event;
   const [showCalendar, setShowCalendar] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+
 
   return (
     <div className="w-full p-6 bg-white shadow-md rounded-xl mb-5">

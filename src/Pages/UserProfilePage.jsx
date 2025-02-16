@@ -23,7 +23,7 @@ const Profile = () => {
 
   return (
     <CenteredContainer>
-    <div className="flex flex-col md:flex-row min-h-screen lg:pb-6 w-full p-4 gap-4 md:gap-6 lg:gap-8">
+    <div className="flex flex-col md:flex-row min-h-screen lg:pb-6 w-full  gap-4 md:gap-6 lg:gap-8">
       {/* Sidebar (Visible on Desktop) */}
       <ProfileSidebar activeSection={activeSection} setActiveSection={setActiveSection} />
   

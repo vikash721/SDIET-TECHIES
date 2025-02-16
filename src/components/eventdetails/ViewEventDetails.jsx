@@ -2,14 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FaLinkedin, FaInstagram, FaShare, FaUsers } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import CenteredContainer from "../CenteredContainer";
-import About from "./eventnavigations/About";
-import Schedule from "./eventnavigations/Schedule";
-import Guidelines from "./eventnavigations/Guidelines";
-import Announcements from "./eventnavigations/Announcements";
-import ContactPage from "./eventnavigations/ContactPage";
-import Faq from "./eventnavigations/Faq";
+import { useParams, useNavigate, useLocation, Outlet } from "react-router-dom";
 import useEventStore from '../../store/useEventStore';
-import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 const ViewEventDetails = () => {
   const { eventId } = useParams();
@@ -17,15 +11,32 @@ const ViewEventDetails = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const event = useEventStore((state) => state.events.find((event) => event.id === parseInt(eventId)));
+  // Find the event in the store
+  const event = useEventStore((state) => 
+    state.events.find((event) => event.id.toString() === eventId)
+  );
 
   useEffect(() => {
-    if (location.pathname.split("/").length < 4) {
-      navigate(`/events/${eventId}/about`);
-    }
-  }, [location, navigate, eventId]);
+    console.log("Event ID:", eventId); // Debugging: Check event ID
+    console.log("Current Path:", location.pathname); // Debugging: Check path
 
-  if (!event) return <div>Event not found</div>;
+    if (!event) {
+      console.warn("Event not found, redirecting to home.");
+      navigate("/", { replace: true });
+      return;
+    }
+
+    // Ensure user lands on a valid tab (only run if not already on a sub-page)
+    const validTabs = ["about", "schedule", "guidelines", "announcements", "contact", "faq"];
+    const currentTab = location.pathname.split("/").pop();
+    
+    if (!validTabs.includes(currentTab)) {
+      console.log("Redirecting to default tab: About");
+      navigate(`/events/${eventId}/about`, { replace: true });
+    }
+  }, [location, navigate, eventId, event]);
+
+  if (!event) return <div>Loading event details...</div>;
 
   const { name, participants, eventBanner, logo, socialLinks } = event;
 
@@ -42,23 +53,26 @@ const ViewEventDetails = () => {
 
   const handleTabClick = (tabId) => {
     navigate(`/events/${eventId}/${tabId}`);
-    setIsMenuOpen(false); // Close the menu on tab click
+    setIsMenuOpen(false);
   };
 
   return (
     <CenteredContainer>
       <div className="relative w-full bg-base-100">
+        {/* Event Banner */}
         <div className="relative h-48 md:h-64 overflow-hidden">
           <img src={eventBanner} alt="Event Banner" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60"></div>
         </div>
 
+        {/* Event Logo */}
         <div className="absolute left-4 md:left-10 top-36 md:top-48 z-10">
           <div className="w-28 h-28 md:w-36 md:h-36 bg-base-100 rounded-2xl shadow-2xl overflow-hidden border-4 border-base-100">
             <img src={logo} className="w-full h-full object-cover" alt="Event Logo" />
           </div>
         </div>
 
+        {/* Event Details */}
         <div className="bg-base-200">
           <div className="container mx-auto px-4">
             <div className="pt-20 md:pt-6 pb-6">
@@ -94,6 +108,7 @@ const ViewEventDetails = () => {
           </div>
         </div>
 
+        {/* Navigation Tabs */}
         <div className="sticky top-0 z-20 bg-base-100 shadow-md rounded-b-2xl overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="md:hidden py-3">
@@ -121,15 +136,9 @@ const ViewEventDetails = () => {
           </div>
         </div>
 
-        <div>
-          <div className="prose max-w-none mt-2">
-            {activeTab === "about" && <About event={event} />}
-            {activeTab === "schedule" && <Schedule event={event} />}
-            {activeTab === "guidelines" && <Guidelines event={event} />}
-            {activeTab === "announcements" && <Announcements event={event} />}
-            {activeTab === "contact" && <ContactPage event={event} />}
-            {activeTab === "faq" && <Faq event={event} />}
-          </div>
+        {/* Tab Content */}
+        <div className="prose max-w-none mt-2">
+          <Outlet /> {/* Render nested routes here */}
         </div>
       </div>
     </CenteredContainer>

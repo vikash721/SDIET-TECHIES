@@ -23,19 +23,16 @@ const roleStyles = {
   Fest: "bg-purple-200 text-purple-900 border border-purple-300",
 };
 
-const EventCard = ({ event, theme = "light" }) => {
+const EventCard = ({ event, theme = "light", onClick }) => {
   const navigate = useNavigate();
   const badgeStyles = roleStyles[event.badge] || roleStyles["Tech"];
 
-  const handleViewDetailsClick = (eventId) => {
-    navigate(`/events/${eventId}`);
-  };
-
   return (
     <div
-      className={`card w-full sm:max-w-[300px] md:max-w-[300px] lg:max-w-[330px] shadow-md hover:shadow-lg transition-all duration-300
+      className={`w-full sm:max-w-[300px] md:max-w-[300px] lg:max-w-[330px] shadow-md hover:shadow-lg transition-all duration-300
       ${theme === "dark" ? "bg-[#1e1e1e] text-white" : "bg-white text-black"} 
-      rounded-lg overflow-hidden`}
+      rounded-lg overflow-hidden cursor-pointer`}
+      onClick={() => onClick(event.id)}
     >
       {/* Image */}
       <figure className="relative w-full pt-[50%]">
@@ -89,7 +86,10 @@ const EventCard = ({ event, theme = "light" }) => {
 
           <button
             className="btn btn-sm bg-indigo-500 flex items-center gap-2 hover:scale-105 transition-transform"
-            onClick={() => handleViewDetailsClick(event.id)}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent parent click
+              navigate(`/events/${event.id}`);
+            }}
           >
             View Details
             <MdArrowForward className="text-base" />

@@ -1,7 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
+import useEventStore from '../../../store/useEventStore'; // Adjust the import path as needed
 
-const Guidelines = ({ event }) => {
+const Guidelines = () => {
+  const { eventId } = useParams();
+  const event = useEventStore((state) => 
+    state.events.find((event) => event.id.toString() === eventId)
+  );
+
   if (!event) return <div>No event data available</div>;
 
   const { guidelinesData } = event;
@@ -64,7 +71,6 @@ const Guidelines = ({ event }) => {
         >
           <h3 className="text-xl font-semibold text-gray-800 mb-2">Resources</h3>
           <p className="text-gray-700">{guidelinesData?.resources?.text}</p> 
-
 
           <a
             href={guidelinesData.resources?.link}

@@ -1,7 +1,14 @@
 import React from "react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import useEventStore from '../../../store/useEventStore'; // Adjust the import path as needed
 
-const ContactPage = ({ event }) => {
+const ContactPage = () => {
+  const { eventId } = useParams();
+  const event = useEventStore((state) => 
+    state.events.find((event) => event.id.toString() === eventId)
+  );
+
   if (!event) return <div>No event data available</div>;
 
   const { people } = event;
