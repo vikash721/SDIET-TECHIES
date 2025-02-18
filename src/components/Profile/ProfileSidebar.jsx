@@ -12,7 +12,7 @@ const sections = [
 
 const ProfileSidebar = ({ activeSection, setActiveSection }) => {
   return (
-    <aside className="hidden md:block w-64 bg-white shadow-xl rounded-2xl p-6 border border-gray-200 ">
+    <aside className="hidden md:block w-64 bg-white  rounded-2xl p-6 border border-gray-200 ">
       <h2 className="text-xl font-bold text-gray-800 mb-6">Profile</h2>
       <nav className="space-y-4">
         {sections.map((section) => (

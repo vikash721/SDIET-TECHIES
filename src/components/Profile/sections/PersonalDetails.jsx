@@ -51,7 +51,7 @@ const PersonalDetails = () => {
   };
 
   return (
-    <div className="max-w-4xl bg-white p-4 md:p-8 md:rounded-xl md:shadow-lg flex flex-col items-center md:items-start space-y-6 md:space-y-8 rounded-lg  border border-gray-200">
+    <div className="max-w-4xl bg-white p-4 md:p-8 md:rounded-xl flex flex-col items-center md:items-start space-y-6 md:space-y-8 rounded-lg  border border-gray-200">
       <div className="w-full flex items-center justify-between">
         <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Personal Details</h1>
         {isEditing ? (

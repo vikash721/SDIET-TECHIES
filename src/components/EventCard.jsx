@@ -85,7 +85,7 @@ const EventCard = ({ event, theme = "light", onClick }) => {
           </div>
 
           <button
-            className="btn btn-sm bg-indigo-500 flex items-center gap-2 hover:scale-105 transition-transform"
+            className="btn btn-sm bg-indigo-500 flex items-center gap-2 hover:scale-101 transition-transform"
             onClick={(e) => {
               e.stopPropagation(); // Prevent parent click
               navigate(`/events/${event.id}`);
