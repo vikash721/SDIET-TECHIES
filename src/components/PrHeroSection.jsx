@@ -85,15 +85,15 @@ const HeroSection = () => {
         <h1 className="text-5xl font-extrabold tracking-wide leading-tight md:text-7xl mb-6">
           Welcome to{" "}
           <motion.span
-            className={swapColors.current ? "text-indigo-600" : "text-orange-600"}
-            animate={{ color: swapColors.current ? "#4F46E5" : "#EA580C" }}
+            className={swapColors.current ? "text-orange-600" : "text-indigo-600 "}
+            animate={{ color: swapColors.current ? "#EA580C" : "#4F46E5" }}
             transition={{ duration: 0.8 }}
           >
             SDIET
           </motion.span>
           <motion.span
-            className={swapColors.current ? "text-orange-600" : "text-indigo-600"}
-            animate={{ color: swapColors.current ? "#EA580C" : "#4F46E5" }}
+            className={swapColors.current ? "text-indigo-600" : "text-orange-600"}
+            animate={{ color: swapColors.current ? "#4F46E5" : "#EA580C" }}
             transition={{ duration: 0.8 }}
           >
             Techies
