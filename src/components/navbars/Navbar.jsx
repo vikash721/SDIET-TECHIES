@@ -59,9 +59,9 @@ const Navbar = () => {
                 <div className="max-w-[1440px] w-full mx-auto px-4 flex justify-between items-center">
                     <div className="flex-1">
                         <a className="btn btn-ghost text-xl font-bold transition transform hover:scale-105 shimmer-effect color-change">
-                            <span className="text-xl md:text-2xl font-bold text-orange-600">
+                            <span className="text-xl md:text-2xl font-bold  text-indigo-600">
                                 SDIET
-                                <span className="text-xl md:text-2xl font-bold text-indigo-600">Techies</span>
+                                <span className="text-xl md:text-2xl font-bold text-orange-600">Techies</span>
                             </span>
 
                         </a>
